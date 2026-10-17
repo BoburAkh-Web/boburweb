@@ -63,7 +63,7 @@ export const skills: Skill[] = [
   { name: "React", icon: "Atom" },
   { name: "Vue 3", icon: "Triangle" },
   { name: "Nuxt 3", icon: "Mountain" },
-  { name: "TypeScript", icon: "FileCode2" },
+  { name: "TypeScript", icon: "FileCode" },
   { name: "JavaScript", icon: "Braces" },
   { name: "Tailwind", icon: "Wind" },
   { name: "shadcn/ui", icon: "Component" },
