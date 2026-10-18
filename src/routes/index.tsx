@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useState, type ReactNode, type MouseEvent } from "react";
-import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin } from "lucide-react";
+import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -63,6 +63,7 @@ function ThemeToggle() {
 
 function Navbar() {
   const links = ["About", "Projects", "Skills", "Contact"];
+  const [open, setOpen] = useState(false);
   return (
     <motion.header
       initial={{ y: -40, opacity: 0 }}
@@ -81,8 +82,36 @@ function Navbar() {
             </a>
           ))}
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            onClick={() => setOpen((o) => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="grid size-9 place-items-center rounded-full border border-border transition-colors hover:bg-muted sm:hidden"
+          >
+            {open ? <X className="size-4" /> : <Menu className="size-4" />}
+          </button>
+        </div>
       </nav>
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mt-2 flex flex-col rounded-2xl bg-card border border-border p-2 shadow-lg sm:hidden"
+        >
+          {links.map((l) => (
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              onClick={() => setOpen(false)}
+              className="rounded-xl px-4 py-3 font-medium transition-colors hover:bg-muted"
+            >
+              {l}
+            </a>
+          ))}
+        </motion.div>
+      )}
     </motion.header>
   );
 }
