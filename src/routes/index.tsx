@@ -98,7 +98,7 @@ function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="glass mt-2 flex flex-col rounded-2xl border border-border p-2 shadow-lg sm:hidden"
+          className="mt-2 flex flex-col rounded-2xl bg-card border border-border p-2 shadow-lg sm:hidden"
         >
           {links.map((l) => (
             <a
