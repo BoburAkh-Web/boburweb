@@ -15,10 +15,10 @@ export const profile = {
   role: "Frontend Developer",
   location: "Tashkent, Uzbekistan",
   tagline: "I build fast, animated web experiences with React, Vue and TypeScript.",
-  email: "you@example.com",
-  telegram: "@username",
-  telegramUrl: "https://t.me/username",
-  github: "https://github.com/username",
+  email: "boburakhone@gmail.com",
+  telegram: "@boobur_akh",
+  telegramUrl: "https://t.me/boobur_akh",
+  github: "https://github.com/BoburAkh-Web",
 };
 
 export const about: { title: string; detail: string }[] = [
@@ -35,27 +35,41 @@ export const projects: Project[] = [
       "Multilingual restaurant platform with admin, chef, courier and customer panels, online ordering and an analytics dashboard.",
     tags: ["React", "TypeScript", "React Query", "Node/Express", "MongoDB"],
     live: "https://bogizilol.uz",
-    github: "#",
   },
   {
     title: "Sapphire Transportation",
     description: "Logistics landing page redesign with an interactive shipping cost calculator.",
     tags: ["React", "TypeScript", "Tailwind"],
-    status: "In progress",
-    github: "#",
+    live: "https://eztransgroup.com",
   },
   {
     title: "CodeKids",
     description: "Educational platform with live multiplayer game rooms for kids.",
     tags: ["Node.js", "Socket.io", "PostgreSQL"],
-    status: "In progress",
-    github: "#",
+    live: "https://umarxon7887.github.io/codekids/",
+  },
+  {
+    title: "Gross Insurance",
+    description: "Corporate insurance website built with Nuxt 3 and Vue 3.",
+    tags: ["Nuxt 3", "Vue 3", "TypeScript"],
+    live: "https://gross.uz",
+  },
+  {
+    title: "Spartans AI",
+    description: "AI-powered web application.",
+    tags: ["AI", "Web"],
+    live: "https://spartans-ai.vercel.app/",
+  },
+  {
+    title: "Happy Quiz",
+    description: "Interactive online quiz app.",
+    tags: ["JavaScript", "Web"],
+    live: "https://happy-quiz.netlify.app/",
   },
   {
     title: "Mahalla Extension",
     description: "Chrome extension that automates bulk data entry from Excel spreadsheets.",
     tags: ["JavaScript", "SheetJS"],
-    github: "#",
   },
 ];
 
