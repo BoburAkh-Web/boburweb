@@ -7,7 +7,12 @@ import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
 import { profile } from "@/data/portfolio";
 
-const suggestions = ["What projects has he built?", "Which frameworks does he use?", "Is he open to work?"];
+const suggestions = [
+  "What projects has he built?",
+  "What's his work experience?",
+  "How can I hire him for a project?",
+  "Which frameworks does he use?",
+];
 
 export function PortfolioChat() {
   const [open, setOpen] = useState(false);
