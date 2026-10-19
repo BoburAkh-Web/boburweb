@@ -28,6 +28,57 @@ export const about: { title: string; detail: string }[] = [
   { title: "Freelancer", detail: "Building web products for clients" },
 ];
 
+// Career timeline — answers "what's your experience / background" questions.
+export const career: { period: string; title: string; detail: string }[] = [
+  {
+    period: "Present",
+    title: "Junior Frontend Developer — Gross Insurance",
+    detail:
+      "Builds and maintains web products for an insurance company using Nuxt 3, Vue 3 and TypeScript. See the live site at https://gross.uz.",
+  },
+  {
+    period: "Present",
+    title: "Freelance web developer",
+    detail:
+      "Works directly with clients to design, build and ship web products end to end — landing pages, full platforms and Chrome extensions.",
+  },
+  {
+    period: "Present",
+    title: "IT mentor for kids — Newton learning center",
+    detail: "Teaches programming fundamentals to kids, including live multiplayer coding activities like CodeKids.",
+  },
+  {
+    period: "Present",
+    title: "Computer Engineering student — Fergana State University",
+    detail: "Studies computer engineering alongside full-time development work.",
+  },
+];
+
+// How to work with Jigar — answers hiring / collaboration questions.
+export const collaboration = {
+  openTo: "Full-time frontend roles and freelance projects, remote or on-site in Uzbekistan.",
+  services: [
+    "Frontend development with React, Vue 3 / Nuxt 3 and TypeScript",
+    "Landing pages and marketing sites with modern animations",
+    "Full web platforms (dashboards, admin panels, online ordering)",
+    "Node.js / Express APIs with MongoDB or PostgreSQL",
+    "Chrome extensions and browser automation",
+  ],
+  process: [
+    "Reach out by email or Telegram with a short description of the project or role",
+    "A quick call or chat to agree on scope, timeline and budget",
+    "Building in small iterations with regular previews",
+    "Launch plus support for fixes and improvements",
+  ],
+  compensation: "Budget and rates are discussed individually for each project — contact Jigar directly.",
+  bestFor: [
+    "Startups and small businesses that need a fast, animated web product",
+    "Teams that need an extra frontend developer comfortable in both React and Vue",
+    "Educational projects for kids and learners",
+  ],
+};
+
+
 export const projects: Project[] = [
   {
     title: "Bogizilol",
