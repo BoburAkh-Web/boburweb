@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { about, profile, projects, skills, type Project } from "@/data/portfolio";
+import { PortfolioChat } from "@/components/PortfolioChat";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -383,6 +384,7 @@ function Index() {
       <Projects />
       <Skills />
       <Contact />
+      <PortfolioChat />
       <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
         © {new Date().getFullYear()} {profile.name} · Built with React & care in {profile.location}
       </footer>
