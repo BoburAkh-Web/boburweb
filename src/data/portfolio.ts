@@ -47,6 +47,10 @@ export const career: { period: string; title: string; detail: string }[] = [
     title: "IT mentor for kids — Newton learning center",
     detail: "Teaches programming fundamentals to kids, including live multiplayer coding activities like CodeKids.",
   },
+];
+
+// Education — shown in the resume section and used by the assistant.
+export const education: { period: string; title: string; detail: string }[] = [
   {
     period: "Present",
     title: "Computer Engineering student — Fergana State University",

@@ -14,6 +14,11 @@ const suggestions = [
   "Which frameworks does he use?",
 ];
 
+// Opens the chat from anywhere on the page, optionally with a pre-loaded question.
+export function openPortfolioChat(question?: string) {
+  window.dispatchEvent(new CustomEvent<string | undefined>("portfolio-chat:open", { detail: question }));
+}
+
 export function PortfolioChat() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -35,6 +40,16 @@ export function PortfolioChat() {
     if (open) inputRef.current?.focus();
   }, [open, status]);
   useEffect(() => endRef.current?.scrollIntoView({ behavior: "smooth" }), [messages, status]);
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const q = (e as CustomEvent<string | undefined>).detail;
+      setOpen(true);
+      if (q && !busy) sendMessage({ text: q });
+    };
+    window.addEventListener("portfolio-chat:open", handler);
+    return () => window.removeEventListener("portfolio-chat:open", handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sendMessage]);
 
   const send = (text: string) => {
     const t = text.trim();
