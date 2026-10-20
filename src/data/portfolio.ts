@@ -52,7 +52,7 @@ export const career: { period: string; title: string; detail: string }[] = [
   {
     period: "Present",
     title: "IT mentor for kids — Newton learning center",
-    detail: "Teaches programming fundamentals to kids, including live multiplayer coding activities like CodeKids.",
+    detail: "Teaches programming fundamentals to kids, including live multiplayer coding activities like EasyCoddy.",
   },
 ];
 
