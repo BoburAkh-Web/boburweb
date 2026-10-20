@@ -1,8 +1,15 @@
 // Edit all portfolio content here.
+import bogizilolImage from "@/assets/proj-bogizilol.png.asset.json";
+import grossImage from "@/assets/proj-gross.png.asset.json";
+import easycoddyImage from "@/assets/proj-easycoddy.png.asset.json";
+import spartansImage from "@/assets/proj-spartans.png.asset.json";
+import happyquizImage from "@/assets/proj-happyquiz.png.asset.json";
+
 export type Project = {
   title: string;
   description: string;
   tags: string[];
+  image?: string;
   live?: string;
   github?: string;
   status?: "In progress";
