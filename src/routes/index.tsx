@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { useEffect, useState, type ReactNode, type MouseEvent } from "react";
-import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X } from "lucide-react";
+import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X, MessageCircleQuestion } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { about, profile, projects, skills, type Project } from "@/data/portfolio";
-import { PortfolioChat } from "@/components/PortfolioChat";
+import { about, career, education, profile, projects, skills, type Project } from "@/data/portfolio";
+import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +63,7 @@ function ThemeToggle() {
 }
 
 function Navbar() {
-  const links = ["About", "Projects", "Skills", "Contact"];
+  const links = ["About", "Projects", "Skills", "Resume", "Contact"];
   const [open, setOpen] = useState(false);
   return (
     <motion.header
@@ -321,6 +321,70 @@ function Skills() {
   );
 }
 
+function ResumeSection() {
+  return (
+    <section id="resume" className="mx-auto max-w-5xl px-6 py-28">
+      <SectionTitle eyebrow="04 — Resume" title="Work, education & skills" />
+      <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
+        <Reveal>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-display text-2xl font-semibold">Work history</h3>
+            <Button
+              size="sm"
+              variant="outline"
+              className="rounded-full bg-transparent"
+              onClick={() => openPortfolioChat("What's his work experience?")}
+            >
+              Ask the assistant <MessageCircleQuestion />
+            </Button>
+          </div>
+          <ol className="relative space-y-8 border-l border-border pl-6">
+            {career.map((c) => (
+              <li key={c.title} className="relative">
+                <span className="absolute -left-[30px] top-1.5 size-2.5 rounded-full bg-lime" />
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-highlight">{c.period}</p>
+                <h4 className="mt-1 text-lg font-semibold">{c.title}</h4>
+                <p className="mt-1 text-sm text-muted-foreground">{c.detail}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <div className="space-y-6">
+          <Reveal delay={0.08}>
+            <div className="card-glow rounded-2xl border border-border bg-card p-6">
+              <h3 className="mb-4 font-display text-xl font-semibold">Education</h3>
+              {education.map((e) => (
+                <div key={e.title}>
+                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-highlight">{e.period}</p>
+                  <h4 className="mt-1 font-semibold">{e.title}</h4>
+                  <p className="mt-1 text-sm text-muted-foreground">{e.detail}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <div className="card-glow rounded-2xl border border-border bg-card p-6">
+              <h3 className="mb-4 font-display text-xl font-semibold">Skills</h3>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((s) => (
+                  <span key={s.name} className="rounded-full bg-lime-soft px-3 py-1 text-sm">
+                    {s.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+          <Reveal delay={0.24}>
+            <Button size="lg" className="w-full rounded-full" onClick={() => openPortfolioChat("How can I hire him for a project?")}>
+              Discuss a project <MessageCircleQuestion />
+            </Button>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   const links = [
     { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
@@ -329,7 +393,7 @@ function Contact() {
   ];
   return (
     <section id="contact" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="04 — Contact" title="Let's build something" />
+      <SectionTitle eyebrow="05 — Contact" title="Let's build something" />
       <div className="grid gap-8 md:grid-cols-[1fr_1.3fr]">
         <Reveal>
           <div className="space-y-3">
@@ -383,6 +447,7 @@ function Index() {
       <About />
       <Projects />
       <Skills />
+      <ResumeSection />
       <Contact />
       <PortfolioChat />
       <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
