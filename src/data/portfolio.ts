@@ -96,6 +96,7 @@ export const projects: Project[] = [
     description:
       "Multilingual restaurant platform with admin, chef, courier and customer panels, online ordering and an analytics dashboard.",
     tags: ["React", "TypeScript", "React Query", "Node/Express", "MongoDB"],
+    image: bogizilolImage.url,
     live: "https://bogizilol.uz",
   },
   {
@@ -105,33 +106,32 @@ export const projects: Project[] = [
     live: "https://eztransgroup.com",
   },
   {
-    title: "CodeKids",
+    title: "EasyCoddy",
     description: "Educational platform with live multiplayer game rooms for kids.",
     tags: ["Node.js", "Socket.io", "PostgreSQL"],
+    image: easycoddyImage.url,
     live: "https://umarxon7887.github.io/codekids/",
   },
   {
     title: "Gross Insurance",
     description: "Corporate insurance website built with Nuxt 3 and Vue 3.",
     tags: ["Nuxt 3", "Vue 3", "TypeScript"],
+    image: grossImage.url,
     live: "https://gross.uz",
   },
   {
     title: "Spartans AI",
     description: "AI-powered web application.",
     tags: ["AI", "Web"],
+    image: spartansImage.url,
     live: "https://spartans-ai.vercel.app/",
   },
   {
     title: "Happy Quiz",
     description: "Interactive online quiz app.",
     tags: ["JavaScript", "Web"],
+    image: happyquizImage.url,
     live: "https://happy-quiz.netlify.app/",
-  },
-  {
-    title: "Mahalla Extension",
-    description: "Chrome extension that automates bulk data entry from Excel spreadsheets.",
-    tags: ["JavaScript", "SheetJS"],
   },
 ];
 
