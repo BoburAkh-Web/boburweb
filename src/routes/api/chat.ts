@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, type UIMessage } from "ai";
 import { createResponsesCall } from "@/lib/ai/responses";
-import { about, career, collaboration, profile, projects, skills } from "@/data/portfolio";
+import { about, career, collaboration, education, profile, projects, skills } from "@/data/portfolio";
 
 function buildInstructions() {
   return `You are the portfolio assistant for ${profile.name}, a ${profile.role} based in ${profile.location}.
@@ -13,6 +13,7 @@ Be concise, friendly, and speak about ${profile.name} in the third person. Polit
 PROFILE: ${JSON.stringify(profile)}
 ABOUT: ${JSON.stringify(about)}
 CAREER: ${JSON.stringify(career)}
+EDUCATION: ${JSON.stringify(education)}
 PROJECTS: ${JSON.stringify(projects)}
 SKILLS: ${skills.map((s) => s.name).join(", ")}
 COLLABORATION: ${JSON.stringify(collaboration)}`;
