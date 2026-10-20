@@ -246,7 +246,17 @@ function ProjectCard({ p }: { p: Project }) {
   return (
     <TiltCard>
       <div className="flex h-full flex-col p-5">
-        <div className="placeholder-art relative mb-5 aspect-[16/9] rounded-xl">
+        <div className="relative mb-5 aspect-[16/9] overflow-hidden rounded-xl bg-muted">
+          {p.image ? (
+            <img
+              src={p.image}
+              alt={`${p.title} screenshot`}
+              loading="lazy"
+              className="size-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+            />
+          ) : (
+            <div className="placeholder-art size-full" />
+          )}
           {p.status && (
             <span className="absolute left-3 top-3 rounded-full bg-lime px-2.5 py-0.5 text-xs font-semibold text-primary-foreground">
               {p.status}
