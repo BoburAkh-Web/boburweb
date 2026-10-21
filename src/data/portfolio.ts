@@ -4,6 +4,8 @@ import grossImage from "@/assets/proj-gross.png.asset.json";
 import easycoddyImage from "@/assets/proj-easycoddy.png.asset.json";
 import spartansImage from "@/assets/proj-spartans.png.asset.json";
 import happyquizImage from "@/assets/proj-happyquiz.png.asset.json";
+import sapphireImage from "@/assets/proj-sapphire.png.asset.json";
+import eztransImage from "@/assets/proj-eztrans.png.asset.json";
 
 export type Project = {
   title: string;
@@ -103,7 +105,15 @@ export const projects: Project[] = [
     title: "Sapphire Transportation",
     description: "Logistics landing page redesign with an interactive shipping cost calculator.",
     tags: ["React", "TypeScript", "Tailwind"],
-    live: "https://eztransgroup.com",
+    image: sapphireImage.url,
+  },
+  {
+    title: "EZ Trans Group",
+    description:
+      "Logistics company website with live dispatch status, expedited service solutions and quote requests.",
+    tags: ["Logistics", "Landing"],
+    image: eztransImage.url,
+    live: "https://logistic-app-akh.netlify.app/",
   },
   {
     title: "EasyCoddy",
