@@ -1,18 +1,11 @@
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot, MessageCircleQuestion, Send, Square, X } from "lucide-react";
+import { Bot, ChevronDown, MessageCircleQuestion, Send, Square, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
-import { profile } from "@/data/portfolio";
-
-const suggestions = [
-  "What projects has he built?",
-  "What's his work experience?",
-  "How can I hire him for a project?",
-  "Which frameworks does he use?",
-];
+import { faq, profile } from "@/data/portfolio";
 
 // Opens the chat from anywhere on the page, optionally with a pre-loaded question.
 export function openPortfolioChat(question?: string) {
@@ -21,6 +14,7 @@ export function openPortfolioChat(question?: string) {
 
 export function PortfolioChat() {
   const [open, setOpen] = useState(false);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const endRef = useRef<HTMLDivElement>(null);
@@ -88,16 +82,37 @@ export function PortfolioChat() {
             <div className="flex-1 space-y-4 overflow-y-auto p-4">
               {messages.length === 0 && (
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Ask anything about my projects or skills.</p>
-                  {suggestions.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => send(s)}
-                      className="block w-full rounded-xl border border-border px-3 py-2 text-left text-sm transition-colors hover:bg-muted"
-                    >
-                      {s}
-                    </button>
-                  ))}
+                  <p className="text-sm text-muted-foreground">Common questions — tap one for an instant answer.</p>
+                  {faq.map((f, i) => {
+                    const isOpen = openFaq === i;
+                    return (
+                      <div key={f.q} className="overflow-hidden rounded-xl border border-border">
+                        <button
+                          onClick={() => setOpenFaq(isOpen ? null : i)}
+                          aria-expanded={isOpen}
+                          className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-sm font-medium transition-colors hover:bg-muted"
+                        >
+                          {f.q}
+                          <ChevronDown
+                            className={`size-4 shrink-0 text-muted-foreground transition-transform ${isOpen ? "rotate-180" : ""}`}
+                          />
+                        </button>
+                        {isOpen && (
+                          <div className="border-t border-border px-3 py-2">
+                            <div className="prose prose-sm max-w-none text-sm text-muted-foreground [&_p]:my-1.5 [&_ul]:my-1.5 [&_ol]:my-1.5">
+                              <ReactMarkdown>{f.a}</ReactMarkdown>
+                            </div>
+                            <button
+                              onClick={() => send(f.q)}
+                              className="mt-1 text-xs font-medium text-highlight transition-opacity hover:opacity-80"
+                            >
+                              Ask the assistant for more →
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               )}
               {messages.map((m) => {

@@ -91,6 +91,38 @@ export const collaboration = {
   ],
 };
 
+// Common questions shown with instant answers in the chat panel; also used by the assistant prompt.
+export const faq: { q: string; a: string }[] = [
+  {
+    q: "What's his work experience?",
+    a: "He works as a Junior Frontend Developer at Gross Insurance, building web products with Nuxt 3, Vue 3 and TypeScript. Alongside that he ships freelance projects end to end, mentors kids in IT at Newton learning center, and studies Computer Engineering at Fergana State University.",
+  },
+  {
+    q: "Which projects has he built?",
+    a: "Highlights include **Bogizilol** (a multilingual restaurant platform with ordering and admin panels), **EZ Trans Group** and **Sapphire Transportation** (logistics sites), **Gross Insurance** (corporate insurance website), **EasyCoddy** (live multiplayer coding rooms for kids), **Spartans AI** and **Happy Quiz**. Each card in the Projects section links to the live site.",
+  },
+  {
+    q: "Which technologies does he work with?",
+    a: "React, Vue 3 / Nuxt 3, TypeScript, JavaScript, Tailwind CSS, shadcn/ui, Node.js, Express, MongoDB, PostgreSQL and Git — for landing pages, full web platforms, APIs and browser extensions.",
+  },
+  {
+    q: "Is he available for new work?",
+    a: "Yes — he's open to full-time frontend roles and freelance projects, remote or on-site in Uzbekistan.",
+  },
+  {
+    q: "How much does a project cost?",
+    a: "Budget and rates are discussed individually for each project. Send a short description of what you need by email or Telegram and he'll come back with a proposal.",
+  },
+  {
+    q: "How do we start working together?",
+    a: "1. Reach out by email or Telegram with a short description of the project or role.\n2. A quick call or chat to agree on scope, timeline and budget.\n3. He builds in small iterations with regular previews.\n4. Launch, plus support for fixes and improvements.",
+  },
+  {
+    q: "How can I contact him?",
+    a: `Email: ${profile.email} · Telegram: ${profile.telegram} — or use the contact form in the Contact section below.`,
+  },
+];
+
 
 export const projects: Project[] = [
   {
