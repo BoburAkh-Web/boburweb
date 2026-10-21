@@ -106,6 +106,7 @@ export const projects: Project[] = [
     description: "Logistics landing page redesign with an interactive shipping cost calculator.",
     tags: ["React", "TypeScript", "Tailwind"],
     image: sapphireImage.url,
+    live: "https://sapphire-transportation.netlify.app/",
   },
   {
     title: "EZ Trans Group",
