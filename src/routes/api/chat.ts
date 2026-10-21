@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { convertToModelMessages, type UIMessage } from "ai";
 import { createResponsesCall } from "@/lib/ai/responses";
-import { about, career, collaboration, education, profile, projects, skills } from "@/data/portfolio";
+import { about, career, collaboration, education, faq, profile, projects, skills } from "@/data/portfolio";
 
 function buildInstructions() {
   return `You are the portfolio assistant for ${profile.name}, a ${profile.role} based in ${profile.location}.
 Answer visitors' questions about ${profile.name}'s projects, skills, career background and how to collaborate, using ONLY the portfolio data below.
+The FAQ section holds pre-approved answers to the most common questions — for those questions start from the FAQ answer and expand naturally when the visitor wants more.
 For career questions (experience, education, jobs, timeline) use the CAREER section. For hiring, freelancing or working together use the COLLABORATION section: describe what he builds, who he works best with, his process, and that budget is discussed individually — never quote specific rates or prices.
 If something isn't covered, say you don't know and suggest contacting ${profile.name} (email: ${profile.email}, Telegram: ${profile.telegram}).
 Be concise, friendly, and speak about ${profile.name} in the third person. Politely decline unrelated requests.
@@ -16,6 +17,7 @@ CAREER: ${JSON.stringify(career)}
 EDUCATION: ${JSON.stringify(education)}
 PROJECTS: ${JSON.stringify(projects)}
 SKILLS: ${skills.map((s) => s.name).join(", ")}
+FAQ: ${JSON.stringify(faq)}
 COLLABORATION: ${JSON.stringify(collaboration)}`;
 }
 
