@@ -372,7 +372,7 @@ function ResumeSection() {
               size="sm"
               variant="outline"
               className="rounded-full bg-transparent"
-              onClick={() => openPortfolioChat(t.faq[0].q)}
+              onClick={() => openPortfolioChat(t.faq[0]?.q)}
             >
               {t.askAssistant} <MessageCircleQuestion />
             </Button>
