@@ -6,8 +6,10 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { about, career, education, profile, projects, skills, type Project } from "@/data/portfolio";
+import { profile, projects, skills, type Project } from "@/data/portfolio";
 import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
+import { LangProvider, useLang } from "@/i18n/LangProvider";
+import { LANGS } from "@/i18n/translations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -62,8 +64,27 @@ function ThemeToggle() {
   );
 }
 
+function LangSwitch() {
+  const { lang, setLang } = useLang();
+  return (
+    <div className="flex rounded-full border border-border p-0.5 text-xs font-semibold">
+      {LANGS.map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          aria-pressed={lang === l}
+          className={`rounded-full px-2 py-1 uppercase transition-colors ${lang === l ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 function Navbar() {
-  const links = ["About", "Projects", "Skills", "Resume", "Contact"];
+  const { t } = useLang();
+  const links = (["about", "projects", "skills", "resume", "contact"] as const).map((id) => ({ id, label: t.nav[id] }));
   const [open, setOpen] = useState(false);
   return (
     <motion.header
@@ -78,12 +99,13 @@ function Navbar() {
         </a>
         <div className="hidden gap-6 text-sm text-muted-foreground sm:flex">
           {links.map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="transition-colors hover:text-foreground">
-              {l}
+            <a key={l.id} href={`#${l.id}`} className="transition-colors hover:text-foreground">
+              {l.label}
             </a>
           ))}
         </div>
         <div className="flex items-center gap-2">
+          <LangSwitch />
           <ThemeToggle />
           <button
             onClick={() => setOpen((o) => !o)}
@@ -103,12 +125,12 @@ function Navbar() {
         >
           {links.map((l) => (
             <a
-              key={l}
-              href={`#${l.toLowerCase()}`}
+              key={l.id}
+              href={`#${l.id}`}
               onClick={() => setOpen(false)}
               className="rounded-xl px-4 py-3 font-medium transition-colors hover:bg-muted"
             >
-              {l}
+              {l.label}
             </a>
           ))}
         </motion.div>
@@ -118,7 +140,8 @@ function Navbar() {
 }
 
 function Hero() {
-  const words = `Hi, I'm ${profile.name} — ${profile.role}`.split(" ");
+  const { t, lang } = useLang();
+  const words = t.greeting(profile.name, t.role).split(" ");
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden px-6">
       <div className="hero-glow pointer-events-none absolute inset-0" />
@@ -128,9 +151,10 @@ function Hero() {
           animate={{ opacity: 1 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-lime-soft px-3 py-1 text-xs font-medium"
         >
-          <MapPin className="size-3" /> {profile.location} · Open to work
+          <MapPin className="size-3" /> {t.location} · {t.openToWork}
         </motion.p>
         <motion.h1
+          key={lang}
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.08 } } }}
@@ -140,7 +164,7 @@ function Hero() {
             <motion.span
               key={i}
               variants={fadeUp}
-              className={`mr-[0.25em] inline-block ${w === profile.name ? "text-highlight underline decoration-lime decoration-4 underline-offset-8" : ""}`}
+              className={`mr-[0.25em] inline-block ${w.replace(/[^\p{L}]/gu, "") === profile.name ? "text-highlight underline decoration-lime decoration-4 underline-offset-8" : ""}`}
             >
               {w}
             </motion.span>
@@ -152,7 +176,7 @@ function Hero() {
           transition={{ delay: 0.7, duration: 0.6 }}
           className="mt-8 max-w-xl text-lg text-muted-foreground"
         >
-          {profile.tagline}
+          {t.tagline}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -162,11 +186,11 @@ function Hero() {
         >
           <Button asChild size="lg" className="rounded-full">
             <a href="#projects">
-              View Projects <ArrowUpRight />
+              {t.viewProjects} <ArrowUpRight />
             </a>
           </Button>
           <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
-            <a href="#contact">Contact</a>
+            <a href="#contact">{t.contact}</a>
           </Button>
         </motion.div>
       </div>
@@ -202,12 +226,13 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
 }
 
 function About() {
+  const { t } = useLang();
   return (
     <section id="about" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="01 — About" title="A little about me" />
+      <SectionTitle eyebrow={t.aboutEyebrow} title={t.aboutTitle} />
       <div className="grid gap-4 sm:grid-cols-2">
-        {about.map((a, i) => (
-          <Reveal key={a.title} delay={i * 0.08}>
+        {t.about.map((a, i) => (
+          <Reveal key={i} delay={i * 0.08}>
             <div className="card-glow h-full rounded-2xl border border-border bg-card p-6">
               <span className="mb-4 block size-2 rounded-full bg-lime" />
               <h3 className="text-xl font-semibold">{a.title}</h3>
@@ -242,7 +267,8 @@ function TiltCard({ children }: { children: ReactNode }) {
   );
 }
 
-function ProjectCard({ p }: { p: Project }) {
+function ProjectCard({ p, i }: { p: Project; i: number }) {
+  const { t } = useLang();
   return (
     <TiltCard>
       <div className="flex h-full flex-col p-5">
@@ -250,7 +276,7 @@ function ProjectCard({ p }: { p: Project }) {
           {p.image ? (
             <img
               src={p.image}
-              alt={`${p.title} screenshot`}
+              alt={`${p.title} ${t.screenshot}`}
               loading="lazy"
               className="size-full object-cover transition-transform duration-500 hover:scale-[1.03]"
             />
@@ -264,7 +290,7 @@ function ProjectCard({ p }: { p: Project }) {
           )}
         </div>
         <h3 className="text-2xl font-semibold">{p.title}</h3>
-        <p className="mt-2 flex-1 text-muted-foreground">{p.description}</p>
+        <p className="mt-2 flex-1 text-muted-foreground">{t.projectDescriptions[i] ?? p.description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {p.tags.map((t) => (
             <span key={t} className="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground">
@@ -276,7 +302,7 @@ function ProjectCard({ p }: { p: Project }) {
           {p.live && (
             <Button asChild size="sm" className="rounded-full">
               <a href={p.live} target="_blank" rel="noreferrer">
-                Live <ExternalLink />
+                {t.live} <ExternalLink />
               </a>
             </Button>
           )}
@@ -294,13 +320,14 @@ function ProjectCard({ p }: { p: Project }) {
 }
 
 function Projects() {
+  const { t } = useLang();
   return (
     <section id="projects" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="02 — Work" title="Selected projects" />
+      <SectionTitle eyebrow={t.workEyebrow} title={t.workTitle} />
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((p, i) => (
           <Reveal key={p.title} delay={(i % 2) * 0.1}>
-            <ProjectCard p={p} />
+            <ProjectCard p={p} i={i} />
           </Reveal>
         ))}
       </div>
@@ -309,9 +336,10 @@ function Projects() {
 }
 
 function Skills() {
+  const { t } = useLang();
   return (
     <section id="skills" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="03 — Stack" title="Tools I work with" />
+      <SectionTitle eyebrow={t.stackEyebrow} title={t.stackTitle} />
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
         {skills.map((s, i) => {
           const Icon = icons[s.icon as keyof typeof icons];
@@ -332,25 +360,26 @@ function Skills() {
 }
 
 function ResumeSection() {
+  const { t } = useLang();
   return (
     <section id="resume" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="04 — Resume" title="Work, education & skills" />
+      <SectionTitle eyebrow={t.resumeEyebrow} title={t.resumeTitle} />
       <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
         <Reveal>
           <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-            <h3 className="font-display text-2xl font-semibold">Work history</h3>
+            <h3 className="font-display text-2xl font-semibold">{t.workHistory}</h3>
             <Button
               size="sm"
               variant="outline"
               className="rounded-full bg-transparent"
-              onClick={() => openPortfolioChat("What's his work experience?")}
+              onClick={() => openPortfolioChat(t.faq[0]?.q)}
             >
-              Ask the assistant <MessageCircleQuestion />
+              {t.askAssistant} <MessageCircleQuestion />
             </Button>
           </div>
           <ol className="relative space-y-8 border-l border-border pl-6">
-            {career.map((c) => (
-              <li key={c.title} className="relative">
+            {t.career.map((c, i) => (
+              <li key={i} className="relative">
                 <span className="absolute -left-[30px] top-1.5 size-2.5 rounded-full bg-lime" />
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-highlight">{c.period}</p>
                 <h4 className="mt-1 text-lg font-semibold">{c.title}</h4>
@@ -362,9 +391,9 @@ function ResumeSection() {
         <div className="space-y-6">
           <Reveal delay={0.08}>
             <div className="card-glow rounded-2xl border border-border bg-card p-6">
-              <h3 className="mb-4 font-display text-xl font-semibold">Education</h3>
-              {education.map((e) => (
-                <div key={e.title}>
+              <h3 className="mb-4 font-display text-xl font-semibold">{t.education}</h3>
+              {t.educationList.map((e, i) => (
+                <div key={i}>
                   <p className="font-mono text-xs uppercase tracking-[0.2em] text-highlight">{e.period}</p>
                   <h4 className="mt-1 font-semibold">{e.title}</h4>
                   <p className="mt-1 text-sm text-muted-foreground">{e.detail}</p>
@@ -374,7 +403,7 @@ function ResumeSection() {
           </Reveal>
           <Reveal delay={0.16}>
             <div className="card-glow rounded-2xl border border-border bg-card p-6">
-              <h3 className="mb-4 font-display text-xl font-semibold">Skills</h3>
+              <h3 className="mb-4 font-display text-xl font-semibold">{t.skills}</h3>
               <div className="flex flex-wrap gap-2">
                 {skills.map((s) => (
                   <span key={s.name} className="rounded-full bg-lime-soft px-3 py-1 text-sm">
@@ -385,8 +414,8 @@ function ResumeSection() {
             </div>
           </Reveal>
           <Reveal delay={0.24}>
-            <Button size="lg" className="w-full rounded-full" onClick={() => openPortfolioChat("How can I hire him for a project?")}>
-              Discuss a project <MessageCircleQuestion />
+            <Button size="lg" className="w-full rounded-full" onClick={() => openPortfolioChat(t.hireQuestion)}>
+              {t.discussProject} <MessageCircleQuestion />
             </Button>
           </Reveal>
         </div>
@@ -396,6 +425,7 @@ function ResumeSection() {
 }
 
 function Contact() {
+  const { t } = useLang();
   const links = [
     { icon: Mail, label: profile.email, href: `mailto:${profile.email}` },
     { icon: Send, label: profile.telegram, href: profile.telegramUrl },
@@ -403,7 +433,7 @@ function Contact() {
   ];
   return (
     <section id="contact" className="mx-auto max-w-5xl px-6 py-28">
-      <SectionTitle eyebrow="05 — Contact" title="Let's build something" />
+      <SectionTitle eyebrow={t.contactEyebrow} title={t.contactTitle} />
       <div className="grid gap-8 md:grid-cols-[1fr_1.3fr]">
         <Reveal>
           <div className="space-y-3">
@@ -429,17 +459,17 @@ function Contact() {
               e.preventDefault();
               const f = new FormData(e.currentTarget);
               window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
-                `Hello from ${f.get("name")}`,
+                t.formHello(String(f.get("name"))),
               )}&body=${encodeURIComponent(`${f.get("message")}\n\n— ${f.get("name")} (${f.get("email")})`)}`;
-              toast.success("Opening your email app…");
+              toast.success(t.formOpening);
             }}
             className="space-y-3 rounded-2xl border border-border bg-card p-6"
           >
-            <Input name="name" required placeholder="Your name" className="h-11" />
+            <Input name="name" required placeholder={t.formName} className="h-11" />
             <Input name="email" type="email" required placeholder="you@email.com" className="h-11" />
-            <Textarea name="message" required placeholder="Tell me about your project" rows={5} />
+            <Textarea name="message" required placeholder={t.formMessage} rows={5} />
             <Button type="submit" size="lg" className="w-full rounded-full">
-              Send message <Send />
+              {t.formSend} <Send />
             </Button>
           </form>
         </Reveal>
@@ -449,6 +479,23 @@ function Contact() {
 }
 
 function Index() {
+  return (
+    <LangProvider>
+      <Page />
+    </LangProvider>
+  );
+}
+
+function Footer() {
+  const { t } = useLang();
+  return (
+    <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
+      {t.footer(profile.name, t.location)}
+    </footer>
+  );
+}
+
+function Page() {
   return (
     <main className="overflow-x-hidden">
       <Navbar />
@@ -460,9 +507,7 @@ function Index() {
       <ResumeSection />
       <Contact />
       <PortfolioChat />
-      <footer className="border-t border-border px-6 py-8 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} {profile.name} · Built with React & care in {profile.location}
-      </footer>
+      <Footer />
     </main>
   );
 }

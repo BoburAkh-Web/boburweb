@@ -5,7 +5,8 @@ import { Bot, ChevronDown, MessageCircleQuestion, Send, Square, X } from "lucide
 import { useEffect, useMemo, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { toast } from "sonner";
-import { faq, profile } from "@/data/portfolio";
+import { profile } from "@/data/portfolio";
+import { useLang } from "@/i18n/LangProvider";
 
 // Opens the chat from anywhere on the page, optionally with a pre-loaded question.
 export function openPortfolioChat(question?: string) {
@@ -13,6 +14,8 @@ export function openPortfolioChat(question?: string) {
 }
 
 export function PortfolioChat() {
+  const { t, lang } = useLang();
+  const faq = t.faq;
   const [open, setOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [input, setInput] = useState("");
@@ -23,9 +26,9 @@ export function PortfolioChat() {
     transport,
     onError: (e) => {
       const m = e.message || "";
-      if (m.includes("429")) toast.error("Too many questions right now — try again in a moment.");
-      else if (m.includes("402")) toast.error("The assistant is out of credits for now.");
-      else toast.error("Couldn't reach the assistant. Please try again.");
+      if (m.includes("429")) toast.error(t.chat.errBusy);
+      else if (m.includes("402")) toast.error(t.chat.errCredits);
+      else toast.error(t.chat.errGeneric);
     },
   });
   const busy = status === "submitted" || status === "streaming";
@@ -38,17 +41,17 @@ export function PortfolioChat() {
     const handler = (e: Event) => {
       const q = (e as CustomEvent<string | undefined>).detail;
       setOpen(true);
-      if (q && !busy) sendMessage({ text: q });
+      if (q && !busy) sendMessage({ text: q }, { body: { lang } });
     };
     window.addEventListener("portfolio-chat:open", handler);
     return () => window.removeEventListener("portfolio-chat:open", handler);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sendMessage]);
+  }, [sendMessage, lang]);
 
   const send = (text: string) => {
-    const t = text.trim();
-    if (!t || busy) return;
-    sendMessage({ text: t });
+    const q = text.trim();
+    if (!q || busy) return;
+    sendMessage({ text: q }, { body: { lang } });
     setInput("");
   };
 
@@ -56,11 +59,11 @@ export function PortfolioChat() {
     <>
       <button
         onClick={() => setOpen((o) => !o)}
-        aria-label={open ? "Close assistant" : "Ask about my work"}
+        aria-label={open ? t.chat.close : t.chat.open}
         className="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-primary px-4 py-3 font-medium text-primary-foreground shadow-lg transition-transform hover:scale-105"
       >
         {open ? <X className="size-5" /> : <MessageCircleQuestion className="size-5" />}
-        <span className="hidden sm:inline">{open ? "Close" : "Ask about my work"}</span>
+        <span className="hidden sm:inline">{open ? t.chat.close : t.chat.open}</span>
       </button>
       <AnimatePresence>
         {open && (
@@ -75,14 +78,14 @@ export function PortfolioChat() {
                 <Bot className="size-5 text-highlight" />
               </span>
               <div>
-                <p className="font-display font-semibold">Ask {profile.name}'s assistant</p>
-                <p className="text-xs text-muted-foreground">Answers from this portfolio</p>
+                <p className="font-display font-semibold">{t.chat.title(profile.name)}</p>
+                <p className="text-xs text-muted-foreground">{t.chat.subtitle}</p>
               </div>
             </div>
             <div className="flex-1 space-y-4 overflow-y-auto p-4">
               {messages.length === 0 && (
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Common questions — tap one for an instant answer.</p>
+                  <p className="text-sm text-muted-foreground">{t.chat.intro}</p>
                   {faq.map((f, i) => {
                     const isOpen = openFaq === i;
                     return (
@@ -106,7 +109,7 @@ export function PortfolioChat() {
                               onClick={() => send(f.q)}
                               className="mt-1 text-xs font-medium text-highlight transition-opacity hover:opacity-80"
                             >
-                              Ask the assistant for more →
+                              {t.chat.askMore}
                             </button>
                           </div>
                         )}
@@ -154,15 +157,15 @@ export function PortfolioChat() {
                   }
                 }}
                 rows={1}
-                placeholder="Ask a question…"
+                placeholder={t.chat.placeholder}
                 className="max-h-28 flex-1 resize-none rounded-xl border border-input bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
               />
               {busy ? (
-                <button type="button" onClick={() => stop()} aria-label="Stop" className="grid size-10 shrink-0 place-items-center rounded-full bg-muted">
+                <button type="button" onClick={() => stop()} aria-label={t.chat.stop} className="grid size-10 shrink-0 place-items-center rounded-full bg-muted">
                   <Square className="size-4" />
                 </button>
               ) : (
-                <button type="submit" aria-label="Send" disabled={!input.trim()} className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground disabled:opacity-50">
+                <button type="submit" aria-label={t.chat.send} disabled={!input.trim()} className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground disabled:opacity-50">
                   <Send className="size-4" />
                 </button>
               )}
