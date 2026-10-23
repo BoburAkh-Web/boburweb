@@ -1,8 +1,7 @@
 # Roadmap
 
-## In progress
-- Hero: real name Bobur, 2+ years experience, tech stack (JS, React, Next.js, TS, Tailwind, shadcn/ui, daisyUI, Material UI, Claude AI) — EN/UZ/RU.
-- Job level wording: Junior+ / middle- developer (not plain "Junior").
+## Done this pass
+- Hero now shows the real name Bobur, a "2+ years of experience" badge and pills for JavaScript, React, Next.js, TypeScript, Tailwind CSS, shadcn/ui, daisyUI, Material UI, Claude AI — in EN/UZ/RU, plus the site title, navbar brand and job level ("Junior+").
 
 ## Waiting on Bobur
 - EasyCoddy's real live URL (card still links to the old CodeKids page).
@@ -11,4 +10,4 @@
 - Corrections to drafted copy: Spartans AI / Happy Quiz descriptions, collaboration steps, FAQ wording, UZ/RU wording, Modern Pizza description and tags.
 
 ## Unverified
-- Uzbek version, phone layout, and assistant replies in each language.
+- Assistant replies in each language.
