@@ -21,18 +21,33 @@ export type Project = {
 export type Skill = { name: string; icon: string }; // icon = lucide-react icon name
 
 export const profile = {
-  name: "Jigar",
+  name: "Bobur",
   role: "Frontend Developer",
+  experience: "2+ years of experience",
   location: "Tashkent, Uzbekistan",
-  tagline: "I build fast, animated web experiences with React, Vue and TypeScript.",
+  tagline:
+    "Frontend developer with 2+ years of experience building fast, animated web products with JavaScript, React, Next.js and TypeScript.",
   email: "boburakhone@gmail.com",
   telegram: "@boobur_akh",
   telegramUrl: "https://t.me/boobur_akh",
   github: "https://github.com/BoburAkh-Web",
 };
 
+// Tech shown under the hero title — the names read the same in every language.
+export const heroStack = [
+  "JavaScript",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "shadcn/ui",
+  "daisyUI",
+  "Material UI",
+  "Claude AI",
+];
+
 export const about: { title: string; detail: string }[] = [
-  { title: "Junior Frontend Developer", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+  { title: "Junior+ Frontend Developer", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
   { title: "Computer Engineering student", detail: "Fergana State University" },
   { title: "IT mentor for kids", detail: "Newton learning center" },
   { title: "Freelancer", detail: "Building web products for clients" },
@@ -42,7 +57,7 @@ export const about: { title: string; detail: string }[] = [
 export const career: { period: string; title: string; detail: string }[] = [
   {
     period: "Present",
-    title: "Junior Frontend Developer — Gross Insurance",
+    title: "Junior+ Frontend Developer — Gross Insurance",
     detail:
       "Builds and maintains web products for an insurance company using Nuxt 3, Vue 3 and TypeScript. See the live site at https://gross.uz.",
   },
@@ -68,11 +83,11 @@ export const education: { period: string; title: string; detail: string }[] = [
   },
 ];
 
-// How to work with Jigar — answers hiring / collaboration questions.
+// How to work with Bobur — answers hiring / collaboration questions.
 export const collaboration = {
   openTo: "Full-time frontend roles and freelance projects, remote or on-site in Uzbekistan.",
   services: [
-    "Frontend development with React, Vue 3 / Nuxt 3 and TypeScript",
+    "Frontend development with React, Next.js, Vue 3 / Nuxt 3 and TypeScript",
     "Landing pages and marketing sites with modern animations",
     "Full web platforms (dashboards, admin panels, online ordering)",
     "Node.js / Express APIs with MongoDB or PostgreSQL",
@@ -84,7 +99,7 @@ export const collaboration = {
     "Building in small iterations with regular previews",
     "Launch plus support for fixes and improvements",
   ],
-  compensation: "Budget and rates are discussed individually for each project — contact Jigar directly.",
+  compensation: "Budget and rates are discussed individually for each project — contact Bobur directly.",
   bestFor: [
     "Startups and small businesses that need a fast, animated web product",
     "Teams that need an extra frontend developer comfortable in both React and Vue",
@@ -96,7 +111,7 @@ export const collaboration = {
 export const faq: { q: string; a: string }[] = [
   {
     q: "What's his work experience?",
-    a: "He works as a Junior Frontend Developer at Gross Insurance, building web products with Nuxt 3, Vue 3 and TypeScript. Alongside that he ships freelance projects end to end, mentors kids in IT at Newton learning center, and studies Computer Engineering at Fergana State University.",
+    a: "He has 2+ years of experience and works as a Junior+ Frontend Developer at Gross Insurance, building web products with Nuxt 3, Vue 3 and TypeScript. Alongside that he ships freelance projects end to end, mentors kids in IT at Newton learning center, and studies Computer Engineering at Fergana State University.",
   },
   {
     q: "Which projects has he built?",
@@ -104,7 +119,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Which technologies does he work with?",
-    a: "React, Vue 3 / Nuxt 3, TypeScript, JavaScript, Tailwind CSS, shadcn/ui, Node.js, Express, MongoDB, PostgreSQL and Git — for landing pages, full web platforms, APIs and browser extensions.",
+    a: "JavaScript, TypeScript, React, Next.js, Vue 3 / Nuxt 3, Tailwind CSS, shadcn/ui, daisyUI, Material UI and Claude AI, plus Node.js, Express, MongoDB, PostgreSQL and Git — for landing pages, full web platforms, APIs and browser extensions.",
   },
   {
     q: "Is he available for new work?",
@@ -188,15 +203,17 @@ export const projects: Project[] = [
 ];
 
 export const skills: Skill[] = [
+  { name: "JavaScript", icon: "Braces" },
   { name: "React", icon: "Atom" },
+  { name: "Next.js", icon: "Zap" },
+  { name: "TypeScript", icon: "FileCode" },
   { name: "Vue 3", icon: "Triangle" },
   { name: "Nuxt 3", icon: "Mountain" },
-  { name: "TypeScript", icon: "FileCode" },
-  { name: "JavaScript", icon: "Braces" },
-  { name: "Tailwind", icon: "Wind" },
+  { name: "Tailwind CSS", icon: "Wind" },
   { name: "shadcn/ui", icon: "Component" },
+  { name: "daisyUI", icon: "Flower2" },
+  { name: "Material UI", icon: "Layers" },
+  { name: "Claude AI", icon: "Sparkles" },
   { name: "Node.js", icon: "Hexagon" },
-  { name: "Express", icon: "Server" },
-  { name: "MongoDB", icon: "Database" },
   { name: "Git", icon: "GitBranch" },
 ];

@@ -5,7 +5,7 @@ import { LANG_NAMES, type Lang } from "@/i18n/translations";
 import { about, career, collaboration, education, faq, profile, projects, skills } from "@/data/portfolio";
 
 function buildInstructions(lang: Lang) {
-  return `You are the portfolio assistant for ${profile.name}, a ${profile.role} based in ${profile.location}.
+  return `You are the portfolio assistant for ${profile.name}, a Junior+ ${profile.role} with ${profile.experience.toLowerCase()} based in ${profile.location}.
 Answer visitors' questions about ${profile.name}'s projects, skills, career background and how to collaborate, using ONLY the portfolio data below.
 The FAQ section holds pre-approved answers to the most common questions — for those questions start from the FAQ answer and expand naturally when the visitor wants more.
 For career questions (experience, education, jobs, timeline) use the CAREER section. For hiring, freelancing or working together use the COLLABORATION section: describe what he builds, who he works best with, his process, and that budget is discussed individually — never quote specific rates or prices.

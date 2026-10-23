@@ -12,6 +12,7 @@ export type Content = {
   role: string;
   location: string;
   tagline: string;
+  heroExperience: string;
   greeting: (name: string, role: string) => string;
   openToWork: string;
   nav: { about: string; projects: string; skills: string; resume: string; contact: string };
@@ -66,6 +67,7 @@ const en: Content = {
   role: profile.role,
   location: profile.location,
   tagline: profile.tagline,
+  heroExperience: profile.experience,
   greeting: (n, r) => `Hi, I'm ${n} — ${r}`,
   openToWork: "Open to work",
   nav: { about: "About", projects: "Projects", skills: "Skills", resume: "Resume", contact: "Contact" },
@@ -119,7 +121,9 @@ const en: Content = {
 const uz: Content = {
   role: "Frontend dasturchi",
   location: "Toshkent, O'zbekiston",
-  tagline: "React, Vue va TypeScript yordamida tez va animatsiyali veb-saytlar yarataman.",
+  tagline:
+    "2+ yillik tajribaga ega frontend dasturchi — JavaScript, React, Next.js va TypeScript yordamida tez va animatsiyali veb-mahsulotlar yarataman.",
+  heroExperience: "2+ yillik tajriba",
   greeting: (n, r) => `Salom, men ${n} — ${r}`,
   openToWork: "Ishga ochiqman",
   nav: { about: "Men haqimda", projects: "Loyihalar", skills: "Ko'nikmalar", resume: "Rezyume", contact: "Aloqa" },
@@ -150,7 +154,7 @@ const uz: Content = {
   screenshot: "skrinshoti",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · ${l}da React va mehr bilan yaratilgan`,
   about: [
-    { title: "Kichik frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Junior+ frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
     { title: "Kompyuter injiniringi talabasi", detail: "Farg'ona davlat universiteti" },
     { title: "Bolalar uchun IT mentor", detail: "Newton o'quv markazi" },
     { title: "Frilanser", detail: "Mijozlar uchun veb-mahsulotlar yarataman" },
@@ -158,7 +162,7 @@ const uz: Content = {
   career: [
     {
       period: "Hozir",
-      title: "Kichik frontend dasturchi — Gross Insurance",
+      title: "Junior+ frontend dasturchi — Gross Insurance",
       detail: "Sug'urta kompaniyasi uchun Nuxt 3, Vue 3 va TypeScript yordamida veb-mahsulotlar yaratadi va qo'llab-quvvatlaydi. Sayt: https://gross.uz.",
     },
     {
@@ -192,7 +196,7 @@ const uz: Content = {
   faq: [
     {
       q: "Uning ish tajribasi qanday?",
-      a: "U Gross Insurance kompaniyasida kichik frontend dasturchi bo'lib, Nuxt 3, Vue 3 va TypeScript bilan veb-mahsulotlar yaratadi. Shuningdek, frilans loyihalarni bajaradi, Newton o'quv markazida bolalarga IT bo'yicha mentorlik qiladi va Farg'ona davlat universitetida kompyuter injiniringini o'qiydi.",
+      a: "U 2+ yildan beri frontend dasturchi bo'lib ishlaydi va hozir Gross Insurance kompaniyasida Junior+ frontend dasturchi sifatida Nuxt 3, Vue 3 va TypeScript bilan veb-mahsulotlar yaratadi. Shuningdek, frilans loyihalarni bajaradi, Newton o'quv markazida bolalarga IT bo'yicha mentorlik qiladi va Farg'ona davlat universitetida kompyuter injiniringini o'qiydi.",
     },
     {
       q: "U qanday loyihalar yaratgan?",
@@ -200,7 +204,7 @@ const uz: Content = {
     },
     {
       q: "U qaysi texnologiyalar bilan ishlaydi?",
-      a: "React, Vue 3 / Nuxt 3, TypeScript, JavaScript, Tailwind CSS, shadcn/ui, Node.js, Express, MongoDB, PostgreSQL va Git — landing sahifalar, veb-platformalar, API va brauzer kengaytmalari uchun.",
+      a: "JavaScript, TypeScript, React, Next.js, Vue 3 / Nuxt 3, Tailwind CSS, shadcn/ui, daisyUI, Material UI va Claude AI, shuningdek Node.js, Express, MongoDB, PostgreSQL va Git — landing sahifalar, veb-platformalar, API va brauzer kengaytmalari uchun.",
     },
     {
       q: "U yangi ishga tayyormi?",
@@ -238,7 +242,9 @@ const uz: Content = {
 const ru: Content = {
   role: "Frontend-разработчик",
   location: "Ташкент, Узбекистан",
-  tagline: "Создаю быстрые анимированные веб-сайты на React, Vue и TypeScript.",
+  tagline:
+    "Frontend-разработчик с опытом 2+ года — создаю быстрые анимированные веб-продукты на JavaScript, React, Next.js и TypeScript.",
+  heroExperience: "Более 2 лет опыта",
   greeting: (n, r) => `Привет, я ${n} — ${r}`,
   openToWork: "Открыт к работе",
   nav: { about: "Обо мне", projects: "Проекты", skills: "Навыки", resume: "Резюме", contact: "Контакты" },
@@ -269,7 +275,7 @@ const ru: Content = {
   screenshot: "скриншот",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · Сделано на React с любовью, ${l}`,
   about: [
-    { title: "Junior frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Junior+ frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
     { title: "Студент компьютерной инженерии", detail: "Ферганский государственный университет" },
     { title: "IT-ментор для детей", detail: "Учебный центр Newton" },
     { title: "Фрилансер", detail: "Создаю веб-продукты для клиентов" },
@@ -277,7 +283,7 @@ const ru: Content = {
   career: [
     {
       period: "Сейчас",
-      title: "Junior frontend-разработчик — Gross Insurance",
+      title: "Junior+ frontend-разработчик — Gross Insurance",
       detail: "Разрабатывает и поддерживает веб-продукты страховой компании на Nuxt 3, Vue 3 и TypeScript. Сайт: https://gross.uz.",
     },
     {
@@ -311,7 +317,7 @@ const ru: Content = {
   faq: [
     {
       q: "Какой у него опыт работы?",
-      a: "Он работает junior frontend-разработчиком в Gross Insurance, создавая веб-продукты на Nuxt 3, Vue 3 и TypeScript. Параллельно делает фриланс-проекты под ключ, менторит детей в IT в учебном центре Newton и учится на компьютерной инженерии в Ферганском государственном университете.",
+      a: "Он работает frontend-разработчиком более 2 лет — сейчас Junior+ frontend-разработчиком в Gross Insurance, где создаёт веб-продукты на Nuxt 3, Vue 3 и TypeScript. Параллельно делает фриланс-проекты под ключ, менторит детей в IT в учебном центре Newton и учится на компьютерной инженерии в Ферганском государственном университете.",
     },
     {
       q: "Какие проекты он создал?",
@@ -319,7 +325,7 @@ const ru: Content = {
     },
     {
       q: "С какими технологиями он работает?",
-      a: "React, Vue 3 / Nuxt 3, TypeScript, JavaScript, Tailwind CSS, shadcn/ui, Node.js, Express, MongoDB, PostgreSQL и Git — для лендингов, веб-платформ, API и браузерных расширений.",
+      a: "JavaScript, TypeScript, React, Next.js, Vue 3 / Nuxt 3, Tailwind CSS, shadcn/ui, daisyUI, Material UI и Claude AI, а также Node.js, Express, MongoDB, PostgreSQL и Git — для лендингов, веб-платформ, API и браузерных расширений.",
     },
     {
       q: "Он свободен для новой работы?",
