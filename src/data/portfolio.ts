@@ -203,15 +203,17 @@ export const projects: Project[] = [
 ];
 
 export const skills: Skill[] = [
+  { name: "JavaScript", icon: "Braces" },
   { name: "React", icon: "Atom" },
+  { name: "Next.js", icon: "Zap" },
+  { name: "TypeScript", icon: "FileCode" },
   { name: "Vue 3", icon: "Triangle" },
   { name: "Nuxt 3", icon: "Mountain" },
-  { name: "TypeScript", icon: "FileCode" },
-  { name: "JavaScript", icon: "Braces" },
-  { name: "Tailwind", icon: "Wind" },
+  { name: "Tailwind CSS", icon: "Wind" },
   { name: "shadcn/ui", icon: "Component" },
+  { name: "daisyUI", icon: "Flower2" },
+  { name: "Material UI", icon: "Layers" },
+  { name: "Claude AI", icon: "Sparkles" },
   { name: "Node.js", icon: "Hexagon" },
-  { name: "Express", icon: "Server" },
-  { name: "MongoDB", icon: "Database" },
   { name: "Git", icon: "GitBranch" },
 ];
