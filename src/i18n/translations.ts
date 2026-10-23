@@ -154,7 +154,7 @@ const uz: Content = {
   screenshot: "skrinshoti",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · ${l}da React va mehr bilan yaratilgan`,
   about: [
-    { title: "Kichik frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Junior+ frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
     { title: "Kompyuter injiniringi talabasi", detail: "Farg'ona davlat universiteti" },
     { title: "Bolalar uchun IT mentor", detail: "Newton o'quv markazi" },
     { title: "Frilanser", detail: "Mijozlar uchun veb-mahsulotlar yarataman" },
@@ -162,7 +162,7 @@ const uz: Content = {
   career: [
     {
       period: "Hozir",
-      title: "Kichik frontend dasturchi — Gross Insurance",
+      title: "Junior+ frontend dasturchi — Gross Insurance",
       detail: "Sug'urta kompaniyasi uchun Nuxt 3, Vue 3 va TypeScript yordamida veb-mahsulotlar yaratadi va qo'llab-quvvatlaydi. Sayt: https://gross.uz.",
     },
     {
@@ -275,7 +275,7 @@ const ru: Content = {
   screenshot: "скриншот",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · Сделано на React с любовью, ${l}`,
   about: [
-    { title: "Junior frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Junior+ frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
     { title: "Студент компьютерной инженерии", detail: "Ферганский государственный университет" },
     { title: "IT-ментор для детей", detail: "Учебный центр Newton" },
     { title: "Фрилансер", detail: "Создаю веб-продукты для клиентов" },
@@ -283,7 +283,7 @@ const ru: Content = {
   career: [
     {
       period: "Сейчас",
-      title: "Junior frontend-разработчик — Gross Insurance",
+      title: "Junior+ frontend-разработчик — Gross Insurance",
       detail: "Разрабатывает и поддерживает веб-продукты страховой компании на Nuxt 3, Vue 3 и TypeScript. Сайт: https://gross.uz.",
     },
     {

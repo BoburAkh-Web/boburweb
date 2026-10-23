@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { profile, projects, skills, type Project } from "@/data/portfolio";
+import { heroStack, profile, projects, skills, type Project } from "@/data/portfolio";
 import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
 import { LangProvider, useLang } from "@/i18n/LangProvider";
 import { LANGS } from "@/i18n/translations";
@@ -182,6 +182,21 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.85, duration: 0.6 }}
+          className="mt-8 flex flex-wrap items-center gap-2"
+        >
+          <span className="rounded-full border border-highlight/40 bg-lime-soft px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-highlight">
+            {t.heroExperience}
+          </span>
+          {heroStack.map((s) => (
+            <span key={s} className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
+              {s}
+            </span>
+          ))}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.95, duration: 0.6 }}
           className="mt-10 flex flex-wrap gap-3"
         >
           <Button asChild size="lg" className="rounded-full">
