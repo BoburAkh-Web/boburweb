@@ -6,6 +6,7 @@ import spartansImage from "@/assets/proj-spartans.png.asset.json";
 import happyquizImage from "@/assets/proj-happyquiz.png.asset.json";
 import sapphireImage from "@/assets/proj-sapphire.png.asset.json";
 import eztransImage from "@/assets/proj-eztrans.png.asset.json";
+import modernPizzaImage from "@/assets/proj-modernpizza.png.asset.json";
 
 export type Project = {
   title: string;
@@ -99,7 +100,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Which projects has he built?",
-    a: "Highlights include **Bogizilol** (a multilingual restaurant platform with ordering and admin panels), **EZ Trans Group** and **Sapphire Transportation** (logistics sites), **Gross Insurance** (corporate insurance website), **EasyCoddy** (live multiplayer coding rooms for kids), **Spartans AI** and **Happy Quiz**. Each card in the Projects section links to the live site.",
+    a: "Highlights include **Bogizilol** (a multilingual restaurant platform with ordering and admin panels), **Modern Pizza Restaurant** (a pizza ordering app with live order tracking), **EZ Trans Group** and **Sapphire Transportation** (logistics sites), **Gross Insurance** (corporate insurance website), **EasyCoddy** (live multiplayer coding rooms for kids), **Spartans AI** and **Happy Quiz**. Each card in the Projects section links to the live site.",
   },
   {
     q: "Which technologies does he work with?",
@@ -132,6 +133,14 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "React Query", "Node/Express", "MongoDB"],
     image: bogizilolImage.url,
     live: "https://bogizilol.uz",
+  },
+  {
+    title: "Modern Pizza Restaurant",
+    description:
+      "Pizza ordering web app with geolocation-based address, cart with extras, priority delivery and live order tracking.",
+    tags: ["React", "TypeScript", "Ordering"],
+    image: modernPizzaImage.url,
+    live: "https://modern-pizzas.vercel.app/",
   },
   {
     title: "Sapphire Transportation",
