@@ -181,6 +181,7 @@ const uz: Content = {
   ],
   projectDescriptions: [
     "Admin, oshpaz, kuryer va mijoz panellari, onlayn buyurtma va analitika paneli bo'lgan ko'p tilli restoran platformasi.",
+    "Geolokatsiya manzili, qo'shimchalar savati, tezkor yetkazish va jonli buyurtma kuzatuvi bilan pizza buyurtma veb-ilovasi.",
     "Interaktiv yuk tashish narxi kalkulyatori bilan logistika landing sahifasi qayta dizayni.",
     "Jonli dispetcher holati, tezkor xizmatlar va narx so'rovlari bilan logistika kompaniyasi sayti.",
     "Bolalar uchun jonli ko'p o'yinchili o'yin xonalari bo'lgan ta'lim platformasi.",
@@ -195,7 +196,7 @@ const uz: Content = {
     },
     {
       q: "U qanday loyihalar yaratgan?",
-      a: "Asosiylari: **Bogizilol** (buyurtma va admin panelli ko'p tilli restoran platformasi), **EZ Trans Group** va **Sapphire Transportation** (logistika saytlari), **Gross Insurance** (korporativ sug'urta sayti), **EasyCoddy** (bolalar uchun jonli kodlash xonalari), **Spartans AI** va **Happy Quiz**. Loyihalar bo'limidagi har bir karta jonli saytga olib boradi.",
+      a: "Asosiylari: **Bogizilol** (buyurtma va admin panelli ko'p tilli restoran platformasi), **Modern Pizza Restaurant** (jonli buyurtma kuzatuvi bilan pizza buyurtma ilovasi), **EZ Trans Group** va **Sapphire Transportation** (logistika saytlari), **Gross Insurance** (korporativ sug'urta sayti), **EasyCoddy** (bolalar uchun jonli kodlash xonalari), **Spartans AI** va **Happy Quiz**. Loyihalar bo'limidagi har bir karta jonli saytga olib boradi.",
     },
     {
       q: "U qaysi texnologiyalar bilan ishlaydi?",
@@ -299,6 +300,7 @@ const ru: Content = {
   ],
   projectDescriptions: [
     "Многоязычная ресторанная платформа с панелями администратора, повара, курьера и клиента, онлайн-заказами и аналитикой.",
+    "Веб-приложение для заказа пиццы: адрес по геолокации, корзина с добавками, срочная доставка и отслеживание заказа.",
     "Редизайн логистического лендинга с интерактивным калькулятором стоимости доставки.",
     "Сайт логистической компании со статусом диспетчеров онлайн, срочными услугами и запросом расчёта.",
     "Образовательная платформа с живыми многопользовательскими игровыми комнатами для детей.",
@@ -313,7 +315,7 @@ const ru: Content = {
     },
     {
       q: "Какие проекты он создал?",
-      a: "Среди главных: **Bogizilol** (многоязычная ресторанная платформа с заказами и админ-панелями), **EZ Trans Group** и **Sapphire Transportation** (логистические сайты), **Gross Insurance** (корпоративный страховой сайт), **EasyCoddy** (живые комнаты программирования для детей), **Spartans AI** и **Happy Quiz**. Каждая карточка в разделе «Проекты» ведёт на рабочий сайт.",
+      a: "Среди главных: **Bogizilol** (многоязычная ресторанная платформа с заказами и админ-панелями), **Modern Pizza Restaurant** (приложение для заказа пиццы с отслеживанием заказа), **EZ Trans Group** и **Sapphire Transportation** (логистические сайты), **Gross Insurance** (корпоративный страховой сайт), **EasyCoddy** (живые комнаты программирования для детей), **Spartans AI** и **Happy Quiz**. Каждая карточка в разделе «Проекты» ведёт на рабочий сайт.",
     },
     {
       q: "С какими технологиями он работает?",
