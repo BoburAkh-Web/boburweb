@@ -21,15 +21,30 @@ export type Project = {
 export type Skill = { name: string; icon: string }; // icon = lucide-react icon name
 
 export const profile = {
-  name: "Jigar",
+  name: "Bobur",
   role: "Frontend Developer",
+  experience: "2+ years of experience",
   location: "Tashkent, Uzbekistan",
-  tagline: "I build fast, animated web experiences with React, Vue and TypeScript.",
+  tagline:
+    "Frontend developer with 2+ years of experience building fast, animated web products with JavaScript, React, Next.js and TypeScript.",
   email: "boburakhone@gmail.com",
   telegram: "@boobur_akh",
   telegramUrl: "https://t.me/boobur_akh",
   github: "https://github.com/BoburAkh-Web",
 };
+
+// Tech shown under the hero title — the names read the same in every language.
+export const heroStack = [
+  "JavaScript",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "shadcn/ui",
+  "daisyUI",
+  "Material UI",
+  "Claude AI",
+];
 
 export const about: { title: string; detail: string }[] = [
   { title: "Junior Frontend Developer", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },

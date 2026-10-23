@@ -14,9 +14,9 @@ import { LANGS } from "@/i18n/translations";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Jigar — Frontend Developer from Tashkent" },
+      { title: "Bobur — Frontend Developer from Tashkent" },
       { name: "description", content: profile.tagline },
-      { property: "og:title", content: "Jigar — Frontend Developer" },
+      { property: "og:title", content: "Bobur — Frontend Developer" },
       { property: "og:description", content: profile.tagline },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -95,7 +95,7 @@ function Navbar() {
     >
       <nav className="glass flex items-center justify-between rounded-full border border-border px-4 py-2 shadow-lg">
         <a href="#top" className="font-display text-lg font-bold">
-          jigar<span className="text-highlight">.</span>
+          bobur<span className="text-highlight">.</span>
         </a>
         <div className="hidden gap-6 text-sm text-muted-foreground sm:flex">
           {links.map((l) => (
