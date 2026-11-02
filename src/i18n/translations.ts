@@ -154,15 +154,15 @@ const uz: Content = {
   screenshot: "skrinshoti",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · ${l}da React va mehr bilan yaratilgan`,
   about: [
-    { title: "Junior+ frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
-    { title: "Kompyuter injiniringi talabasi", detail: "Farg'ona davlat universiteti" },
-    { title: "Bolalar uchun IT mentor", detail: "Newton o'quv markazi" },
+    { title: "Frontend dasturchi", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Kompyuter injiniringi talabasi", detail: "Farg'ona davlat texnika universiteti" },
+    { title: "Frontend dasturchi va bolalar uchun IT mentor", detail: "Newton IT Academy" },
     { title: "Frilanser", detail: "Mijozlar uchun veb-mahsulotlar yarataman" },
   ],
   career: [
     {
       period: "Hozir",
-      title: "Junior+ frontend dasturchi — Gross Insurance",
+      title: "Frontend dasturchi — Gross Insurance",
       detail: "Sug'urta kompaniyasi uchun Nuxt 3, Vue 3 va TypeScript yordamida veb-mahsulotlar yaratadi va qo'llab-quvvatlaydi. Sayt: https://gross.uz.",
     },
     {
@@ -172,14 +172,14 @@ const uz: Content = {
     },
     {
       period: "Hozir",
-      title: "Bolalar uchun IT mentor — Newton o'quv markazi",
-      detail: "Bolalarga dasturlash asoslarini o'rgatadi, jumladan EasyCoddy kabi jonli ko'p o'yinchili kodlash mashg'ulotlari orqali.",
+      title: "Frontend dasturchi va bolalar uchun IT mentor — Newton IT Academy",
+      detail: "Akademiya uchun frontend interfeyslar yaratadi va bolalarga dasturlash asoslarini o'rgatadi, jumladan EasyCoddy kabi jonli ko'p o'yinchili kodlash mashg'ulotlari orqali.",
     },
   ],
   educationList: [
     {
       period: "Hozir",
-      title: "Kompyuter injiniringi talabasi — Farg'ona davlat universiteti",
+      title: "Kompyuter injiniringi talabasi — Farg'ona davlat texnika universiteti",
       detail: "To'liq kunlik dasturlash ishi bilan birga kompyuter injiniringini o'qiydi.",
     },
   ],
@@ -197,7 +197,7 @@ const uz: Content = {
   faq: [
     {
       q: "Uning ish tajribasi qanday?",
-      a: "U 2+ yildan beri frontend dasturchi bo'lib ishlaydi va hozir Gross Insurance kompaniyasida Junior+ frontend dasturchi sifatida Nuxt 3, Vue 3 va TypeScript bilan veb-mahsulotlar yaratadi. Shuningdek, frilans loyihalarni bajaradi, Newton o'quv markazida bolalarga IT bo'yicha mentorlik qiladi va Farg'ona davlat universitetida kompyuter injiniringini o'qiydi.",
+      a: "U 2+ yildan beri frontend dasturchi bo'lib ishlaydi va hozir Gross Insurance kompaniyasida frontend dasturchi sifatida Nuxt 3, Vue 3 va TypeScript bilan veb-mahsulotlar yaratadi. Shuningdek, frilans loyihalarni bajaradi, Newton IT Academy'da frontend dasturchi bo'lib ishlaydi va bolalarga IT bo'yicha mentorlik qiladi hamda Farg'ona davlat texnika universitetida kompyuter injiniringini o'qiydi.",
     },
     {
       q: "U qanday loyihalar yaratgan?",
@@ -276,15 +276,15 @@ const ru: Content = {
   screenshot: "скриншот",
   footer: (n, l) => `© ${new Date().getFullYear()} ${n} · Сделано на React с любовью, ${l}`,
   about: [
-    { title: "Junior+ frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
-    { title: "Студент компьютерной инженерии", detail: "Ферганский государственный университет" },
-    { title: "IT-ментор для детей", detail: "Учебный центр Newton" },
+    { title: "Frontend-разработчик", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+    { title: "Студент компьютерной инженерии", detail: "Ферганский государственный технический университет" },
+    { title: "Frontend-разработчик и IT-ментор для детей", detail: "Newton IT Academy" },
     { title: "Фрилансер", detail: "Создаю веб-продукты для клиентов" },
   ],
   career: [
     {
       period: "Сейчас",
-      title: "Junior+ frontend-разработчик — Gross Insurance",
+      title: "Frontend-разработчик — Gross Insurance",
       detail: "Разрабатывает и поддерживает веб-продукты страховой компании на Nuxt 3, Vue 3 и TypeScript. Сайт: https://gross.uz.",
     },
     {
@@ -294,14 +294,14 @@ const ru: Content = {
     },
     {
       period: "Сейчас",
-      title: "IT-ментор для детей — учебный центр Newton",
-      detail: "Обучает детей основам программирования, в том числе через живые многопользовательские занятия вроде EasyCoddy.",
+      title: "Frontend-разработчик и IT-ментор для детей — Newton IT Academy",
+      detail: "Разрабатывает frontend-интерфейсы для академии и обучает детей основам программирования, в том числе через живые многопользовательские занятия вроде EasyCoddy.",
     },
   ],
   educationList: [
     {
       period: "Сейчас",
-      title: "Студент компьютерной инженерии — Ферганский государственный университет",
+      title: "Студент компьютерной инженерии — Ферганский государственный технический университет",
       detail: "Учится компьютерной инженерии параллельно с работой разработчиком.",
     },
   ],
@@ -319,7 +319,7 @@ const ru: Content = {
   faq: [
     {
       q: "Какой у него опыт работы?",
-      a: "Он работает frontend-разработчиком более 2 лет — сейчас Junior+ frontend-разработчиком в Gross Insurance, где создаёт веб-продукты на Nuxt 3, Vue 3 и TypeScript. Параллельно делает фриланс-проекты под ключ, менторит детей в IT в учебном центре Newton и учится на компьютерной инженерии в Ферганском государственном университете.",
+      a: "Он работает frontend-разработчиком более 2 лет — сейчас frontend-разработчиком в Gross Insurance, где создаёт веб-продукты на Nuxt 3, Vue 3 и TypeScript. Параллельно делает фриланс-проекты под ключ, работает frontend-разработчиком и IT-ментором для детей в Newton IT Academy и учится на компьютерной инженерии в Ферганском государственном техническом университете.",
     },
     {
       q: "Какие проекты он создал?",

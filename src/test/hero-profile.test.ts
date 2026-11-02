@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaboration, heroStack, profile, skills } from "@/data/portfolio";
+import { about, career, collaboration, education, faq, heroStack, profile, skills } from "@/data/portfolio";
 import { content, LANGS } from "@/i18n/translations";
 
 describe("hero identity", () => {
@@ -21,5 +21,43 @@ describe("hero identity", () => {
       expect(content[l].heroExperience).toContain("2");
       expect(content[l].tagline).toContain("Next.js");
     }
+  });
+
+  it("never labels him Junior in any language", () => {
+    const texts = [
+      ...about.map((a) => `${a.title} ${a.detail}`),
+      ...career.map((c) => `${c.title} ${c.detail}`),
+      ...faq.map((f) => `${f.q} ${f.a}`),
+      ...LANGS.flatMap((l) => [
+        ...content[l].about.map((a) => `${a.title} ${a.detail}`),
+        ...content[l].career.map((c) => `${c.title} ${c.detail}`),
+        ...content[l].educationList.map((e) => `${e.title} ${e.detail}`),
+        ...content[l].faq.map((f) => `${f.q} ${f.a}`),
+      ]),
+    ].join(" ");
+    expect(texts.toLowerCase()).not.toContain("junior");
+  });
+
+  it("shows him as Frontend Developer and mentor at Newton IT Academy", () => {
+    const newton = about.find((a) => a.detail.includes("Newton"));
+    expect(newton?.title).toBe("Frontend Developer & IT mentor for kids");
+    expect(newton?.detail).toBe("Newton IT Academy");
+    for (const l of LANGS) {
+      const card = content[l].about.find((a) => a.detail.includes("Newton"));
+      expect(card?.detail).toBe("Newton IT Academy");
+      expect(card?.title).toMatch(/mentor|ментор|mentor/i);
+      expect(card?.title).toMatch(/frontend/i);
+    }
+  });
+
+  it("names Fergana State Technology University in every language", () => {
+    expect(education.some((e) => e.title.includes("Fergana State Technology University"))).toBe(true);
+    expect(about.find((a) => a.detail.includes("Fergana"))?.detail).toBe("Fergana State Technology University");
+    expect(content.uz.about.find((a) => a.detail.includes("Farg'ona"))?.detail).toBe(
+      "Farg'ona davlat texnika universiteti",
+    );
+    expect(content.ru.about.find((a) => a.detail.includes("Ферганский"))?.detail).toBe(
+      "Ферганский государственный технический университет",
+    );
   });
 });
