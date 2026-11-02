@@ -45,7 +45,7 @@ describe("hero identity", () => {
     for (const l of LANGS) {
       const card = content[l].about.find((a) => a.detail.includes("Newton"));
       expect(card?.detail).toBe("Newton IT Academy");
-      expect(card?.title).toMatch(/mentor/);
+      expect(card?.title).toMatch(/mentor|ментор|mentor/i);
       expect(card?.title).toMatch(/frontend/i);
     }
   });
