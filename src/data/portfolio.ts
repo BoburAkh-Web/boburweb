@@ -48,9 +48,9 @@ export const heroStack = [
 ];
 
 export const about: { title: string; detail: string }[] = [
-  { title: "Junior+ Frontend Developer", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
-  { title: "Computer Engineering student", detail: "Fergana State University" },
-  { title: "IT mentor for kids", detail: "Newton learning center" },
+  { title: "Frontend Developer", detail: "Gross Insurance — Nuxt 3, Vue 3, TypeScript" },
+  { title: "Computer Engineering student", detail: "Fergana State Technology University" },
+  { title: "Frontend Developer & IT mentor for kids", detail: "Newton IT Academy" },
   { title: "Freelancer", detail: "Building web products for clients" },
 ];
 
@@ -58,7 +58,7 @@ export const about: { title: string; detail: string }[] = [
 export const career: { period: string; title: string; detail: string }[] = [
   {
     period: "Present",
-    title: "Junior+ Frontend Developer — Gross Insurance",
+    title: "Frontend Developer — Gross Insurance",
     detail:
       "Builds and maintains web products for an insurance company using Nuxt 3, Vue 3 and TypeScript. See the live site at https://gross.uz.",
   },
@@ -70,8 +70,8 @@ export const career: { period: string; title: string; detail: string }[] = [
   },
   {
     period: "Present",
-    title: "IT mentor for kids — Newton learning center",
-    detail: "Teaches programming fundamentals to kids, including live multiplayer coding activities like EasyCoddy.",
+    title: "Frontend Developer & IT mentor for kids — Newton IT Academy",
+    detail: "Builds frontend interfaces for the academy and teaches programming fundamentals to kids, including live multiplayer coding activities like EasyCoddy.",
   },
 ];
 
@@ -79,7 +79,7 @@ export const career: { period: string; title: string; detail: string }[] = [
 export const education: { period: string; title: string; detail: string }[] = [
   {
     period: "Present",
-    title: "Computer Engineering student — Fergana State University",
+    title: "Computer Engineering student — Fergana State Technology University",
     detail: "Studies computer engineering alongside full-time development work.",
   },
 ];
@@ -112,7 +112,7 @@ export const collaboration = {
 export const faq: { q: string; a: string }[] = [
   {
     q: "What's his work experience?",
-    a: "He has 2+ years of experience and works as a Junior+ Frontend Developer at Gross Insurance, building web products with Nuxt 3, Vue 3 and TypeScript. Alongside that he ships freelance projects end to end, mentors kids in IT at Newton learning center, and studies Computer Engineering at Fergana State University.",
+    a: "He has 2+ years of experience and works as a Frontend Developer at Gross Insurance, building web products with Nuxt 3, Vue 3 and TypeScript. Alongside that he ships freelance projects end to end, works as a Frontend Developer and IT mentor for kids at Newton IT Academy, and studies Computer Engineering at Fergana State Technology University.",
   },
   {
     q: "Which projects has he built?",
