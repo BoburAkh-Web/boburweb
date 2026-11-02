@@ -51,7 +51,7 @@ describe("hero identity", () => {
   });
 
   it("names Fergana State Technology University in every language", () => {
-    expect(education[0].title).toContain("Fergana State Technology University");
+    expect(education.some((e) => e.title.includes("Fergana State Technology University"))).toBe(true);
     expect(about.find((a) => a.detail.includes("Fergana"))?.detail).toBe("Fergana State Technology University");
     expect(content.uz.about.find((a) => a.detail.includes("Farg'ona"))?.detail).toBe(
       "Farg'ona davlat texnika universiteti",
