@@ -7,6 +7,7 @@ import happyquizImage from "@/assets/proj-happyquiz.png.asset.json";
 import sapphireImage from "@/assets/proj-sapphire.png.asset.json";
 import eztransImage from "@/assets/proj-eztrans.png.asset.json";
 import modernPizzaImage from "@/assets/proj-modernpizza.png.asset.json";
+import cbctImage from "@/assets/proj-cbct.png.asset.json";
 
 export type Project = {
   title: string;
@@ -115,7 +116,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "Which projects has he built?",
-    a: "Highlights include **Bogizilol** (a multilingual restaurant platform with ordering and admin panels), **Modern Pizza Restaurant** (a pizza ordering app with live order tracking), **EZ Trans Group** and **Sapphire Transportation** (logistics sites), **Gross Insurance** (corporate insurance website), **EasyCoddy** (live multiplayer coding rooms for kids), **Spartans AI** and **Happy Quiz**. Each card in the Projects section links to the live site.",
+    a: "Highlights include **Bogizilol** (a multilingual restaurant platform with ordering and admin panels), **CBCT Optimizator** (a cost optimizer for dental CBCT equipment built on dynamic programming), **Modern Pizza Restaurant** (a pizza ordering app with live order tracking), **EZ Trans Group** and **Sapphire Transportation** (logistics sites), **Gross Insurance** (corporate insurance website), **EasyCoddy** (live multiplayer coding rooms for kids), **Spartans AI** and **Happy Quiz**. Each card in the Projects section links to the live site.",
   },
   {
     q: "Which technologies does he work with?",
@@ -148,6 +149,14 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "React Query", "Node/Express", "MongoDB"],
     image: bogizilolImage.url,
     live: "https://bogizilol.uz",
+  },
+  {
+    title: "CBCT Optimizator",
+    description:
+      "Cost optimizer for dental CBCT equipment: dynamic programming works out the cheapest part-replacement schedule over a multi-year horizon, with per-part results, cost charts and an Uzbek/Russian interface.",
+    tags: ["React", "Dynamic Programming", "Optimization"],
+    image: cbctImage.url,
+    live: "https://optimizer-3d-app.vercel.app/",
   },
   {
     title: "Modern Pizza Restaurant",
