@@ -2,8 +2,8 @@
 import bogizilolImage from "@/assets/proj-bogizilol.png.asset.json";
 import grossImage from "@/assets/proj-gross.png.asset.json";
 import easycoddyImage from "@/assets/proj-easycoddy.png.asset.json";
-import spartansImage from "@/assets/proj-spartans.png.asset.json";
-import happyquizImage from "@/assets/proj-happyquiz.png.asset.json";
+import spartansImage from "@/assets/proj-spartans-ui.jpg";
+import happyquizImage from "@/assets/proj-happyquiz-ui.jpg";
 import sapphireImage from "@/assets/proj-sapphire.png.asset.json";
 import eztransImage from "@/assets/proj-eztrans.png.asset.json";
 import modernPizzaImage from "@/assets/proj-modernpizza.png.asset.json";
@@ -199,14 +199,14 @@ export const projects: Project[] = [
     title: "Spartans AI",
     description: "AI-powered web application.",
     tags: ["AI", "Web"],
-    image: spartansImage.url,
+    image: spartansImage,
     live: "https://spartans-ai.vercel.app/",
   },
   {
     title: "Happy Quiz",
     description: "Interactive online quiz app.",
     tags: ["JavaScript", "Web"],
-    image: happyquizImage.url,
+    image: happyquizImage,
     live: "https://happy-quiz.netlify.app/",
   },
 ];
