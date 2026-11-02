@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collaboration, heroStack, profile, skills } from "@/data/portfolio";
+import { about, career, collaboration, education, faq, heroStack, profile, skills } from "@/data/portfolio";
 import { content, LANGS } from "@/i18n/translations";
 
 describe("hero identity", () => {
