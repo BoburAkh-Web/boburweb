@@ -10,6 +10,7 @@ import { heroStack, profile, projects, skills, type Project } from "@/data/portf
 import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
 import { LangProvider, useLang } from "@/i18n/LangProvider";
 import { LANGS } from "@/i18n/translations";
+import { help } from "@/i18n/audiences";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -256,6 +257,61 @@ function About() {
           </Reveal>
         ))}
       </div>
+    </section>
+  );
+}
+
+function HowIHelp() {
+  const { lang } = useLang();
+  const h = help[lang];
+  return (
+    <section id="help" className="mx-auto max-w-5xl px-6 py-28">
+      <SectionTitle eyebrow={h.eyebrow} title={h.title} />
+      <Reveal>
+        <p className="-mt-6 mb-12 max-w-2xl text-lg text-muted-foreground">{h.intro}</p>
+      </Reveal>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {h.audiences.map((a, i) => {
+          const Icon = icons[a.icon as keyof typeof icons];
+          return (
+            <Reveal key={a.who} delay={(i % 3) * 0.08}>
+              <div className="card-glow flex h-full flex-col rounded-2xl border border-border bg-card p-6">
+                <div className="mb-4 grid size-11 place-items-center rounded-xl bg-lime-soft text-highlight">
+                  {Icon && <Icon className="size-5" />}
+                </div>
+                <h3 className="text-xl font-semibold">{a.who}</h3>
+                <p className="mt-3 text-xs font-mono uppercase tracking-wider text-muted-foreground">{h.problemLabel}</p>
+                <p className="mt-1 text-sm">{a.pain}</p>
+                <p className="mt-4 text-xs font-mono uppercase tracking-wider text-muted-foreground">{h.offerLabel}</p>
+                <ul className="mt-2 space-y-1.5 text-sm">
+                  {a.offer.map((o) => (
+                    <li key={o} className="flex gap-2">
+                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-lime" />
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
+      <Reveal>
+        <div className="mt-10 rounded-2xl border border-border bg-card p-6 sm:p-8">
+          <h3 className="mb-6 text-2xl font-semibold">{h.whyTitle}</h3>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {h.why.map((w) => (
+              <div key={w.title}>
+                <p className="font-semibold text-highlight">{w.title}</p>
+                <p className="mt-1 text-sm text-muted-foreground">{w.detail}</p>
+              </div>
+            ))}
+          </div>
+          <Button asChild className="mt-8 rounded-full">
+            <a href="#contact">{h.cta} <ArrowUpRight className="size-4" /></a>
+          </Button>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -517,6 +573,7 @@ function Page() {
       <Hero />
       <Marquee />
       <About />
+      <HowIHelp />
       <Projects />
       <Skills />
       <ResumeSection />

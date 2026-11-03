@@ -7,7 +7,7 @@
 - EasyCoddy's real live URL (card still links to the old CodeKids page).
 - Sender email domain, so contact-form messages reach his inbox.
 - Start years for the Resume timeline.
-- Corrections to drafted copy: Spartans AI / Happy Quiz descriptions, collaboration steps, FAQ wording, UZ/RU wording, Modern Pizza description and tags, CBCT Optimizator description and tags.
+- Corrections to drafted copy: Spartans AI / Happy Quiz descriptions, collaboration steps, FAQ wording, UZ/RU wording, Modern Pizza description and tags, CBCT Optimizator description and tags, "How I can help you" section texts.
 
 ## Unverified
 - Assistant replies in each language.
