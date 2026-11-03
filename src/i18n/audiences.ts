@@ -17,7 +17,7 @@ export type HelpContent = {
 const icons = ["Stethoscope", "Briefcase", "Calculator", "UtensilsCrossed", "Truck", "GraduationCap"];
 
 const en: HelpContent = {
-  eyebrow: "00 — How I can help you",
+  eyebrow: "How I can help you",
   title: "Why you need a website — explained simply",
   intro:
     "You don't need to know anything about code. Tell me what your business does, and I turn it into a clear, fast website or online tool that brings clients and saves your time.",
@@ -42,7 +42,7 @@ const en: HelpContent = {
 };
 
 const uz: HelpContent = {
-  eyebrow: "00 — Sizga qanday yordam beraman",
+  eyebrow: "Sizga qanday yordam beraman",
   title: "Nega sizga sayt kerak — oddiy tilda",
   intro:
     "Dasturlashni bilishingiz shart emas. Biznesingiz haqida aytib bering — men uni mijoz olib keladigan va vaqtingizni tejaydigan tushunarli, tez sayt yoki onlayn vositaga aylantiraman.",
@@ -67,7 +67,7 @@ const uz: HelpContent = {
 };
 
 const ru: HelpContent = {
-  eyebrow: "00 — Чем я могу помочь",
+  eyebrow: "Чем я могу помочь",
   title: "Зачем вам сайт — простыми словами",
   intro:
     "Вам не нужно разбираться в коде. Расскажите, чем занимается ваш бизнес, а я превращу это в понятный, быстрый сайт или онлайн-инструмент, который приводит клиентов и экономит ваше время.",
