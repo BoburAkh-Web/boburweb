@@ -14,7 +14,7 @@ export type HelpContent = {
   cta: string;
 };
 
-const icons = ["Stethoscope", "Briefcase", "Calculator", "UtensilsCrossed", "Truck", "GraduationCap"];
+const icons = ["Stethoscope", "Briefcase", "Calculator", "UtensilsCrossed", "Truck", "GraduationCap"] as const;
 
 const en: HelpContent = {
   eyebrow: "How I can help you",
