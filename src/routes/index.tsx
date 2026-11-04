@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { heroStack, profile, projects, skills, type Project } from "@/data/portfolio";
+import heroImage from "@/assets/hero-dev-real.png.asset.json";
 import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
 import { LangProvider, useLang } from "@/i18n/LangProvider";
 import { LANGS } from "@/i18n/translations";
@@ -144,9 +145,10 @@ function Hero() {
   const { t, lang } = useLang();
   const words = t.greeting(profile.name, t.role).split(" ");
   return (
-    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden px-6">
+    <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-28 pb-16">
       <div className="hero-glow pointer-events-none absolute inset-0" />
-      <div className="relative mx-auto w-full max-w-5xl">
+      <div className="relative mx-auto grid w-full max-w-5xl items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -159,7 +161,7 @@ function Hero() {
           initial="hidden"
           animate="show"
           variants={{ show: { transition: { staggerChildren: 0.08 } } }}
-          className="text-5xl font-bold leading-[1.02] sm:text-7xl md:text-8xl"
+          className="text-5xl font-bold leading-[1.02] sm:text-7xl"
         >
           {words.map((w, i) => (
             <motion.span
@@ -208,6 +210,23 @@ function Hero() {
           <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
             <a href="#contact">{t.contact}</a>
           </Button>
+        </motion.div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mx-auto w-full max-w-sm lg:max-w-none"
+        >
+          <div className="absolute -inset-5 rounded-[2.5rem] bg-highlight/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+            <img
+              src={heroImage.url}
+              alt="Illustration of Bobur coding at a desk at night"
+              className="max-h-[380px] w-full object-cover lg:max-h-none"
+            />
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-highlight/20" />
+          </div>
         </motion.div>
       </div>
     </section>
