@@ -148,7 +148,7 @@ export const projects: Project[] = [
       "Multilingual restaurant platform with admin, chef, courier and customer panels, online ordering and an analytics dashboard.",
     tags: ["React", "TypeScript", "React Query", "Node/Express", "MongoDB"],
     image: bogizilolImage.url,
-    live: "https://bogizilol.uz",
+    live: "https://bogizilol-app.vercel.app/",
   },
   {
     title: "CBCT Optimizator",
