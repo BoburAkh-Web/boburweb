@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { useEffect, useState, type ReactNode, type MouseEvent } from "react";
+import { motion, useReducedMotion, useScroll, useTransform, useMotionValue, useSpring, useInView, animate, type Variants } from "framer-motion";
+import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
 import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X, MessageCircleQuestion } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { heroStack, profile, projects, skills, type Project } from "@/data/portfolio";
+import { heroStack, profile, projects, skills, yearsExperience, type Project } from "@/data/portfolio";
 import heroImage from "@/assets/hero-dev-real.png.asset.json";
 import { PortfolioChat, openPortfolioChat } from "@/components/PortfolioChat";
 import { LangProvider, useLang } from "@/i18n/LangProvider";
@@ -28,8 +28,13 @@ export const Route = createFileRoute("/")({
 });
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  hidden: { opacity: 0, y: 24, filter: "blur(4px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
 };
 
 function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
@@ -40,6 +45,62 @@ function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }
       whileInView="show"
       viewport={{ once: true, margin: "-80px" }}
       transition={{ delay }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+// Counts a number up from zero the first time it scrolls into view.
+function Counter({ to, suffix = "" }: { to: number; suffix?: string }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [n, setN] = useState(reduce ? to : 0);
+  useEffect(() => {
+    if (!inView || reduce) return;
+    const controls = animate(0, to, {
+      duration: 1.2,
+      ease: [0.22, 1, 0.36, 1],
+      onUpdate: (v) => setN(Math.round(v)),
+    });
+    return () => controls.stop();
+  }, [inView, reduce, to]);
+  return (
+    <span ref={ref}>
+      {n}
+      {suffix}
+    </span>
+  );
+}
+
+// Nudges its child a few pixels toward the cursor, then springs it back.
+function Magnetic({ children, strength = 0.18, radius = 8 }: { children: ReactNode; strength?: number; radius?: number }) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 240, damping: 20, mass: 0.5 });
+  const sy = useSpring(y, { stiffness: 240, damping: 20, mass: 0.5 });
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (reduce || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    x.set(Math.max(-radius, Math.min(radius, dx * strength)));
+    y.set(Math.max(-radius, Math.min(radius, dy * strength)));
+  };
+  const reset = () => {
+    x.set(0);
+    y.set(0);
+  };
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={reset}
+      style={{ x: sx, y: sy }}
+      className="inline-flex"
     >
       {children}
     </motion.div>
@@ -144,6 +205,9 @@ function Navbar() {
 function Hero() {
   const { t, lang } = useLang();
   const words = t.greeting(profile.name, t.role).split(" ");
+  const reduce = useReducedMotion();
+  const { scrollY } = useScroll();
+  const picY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -60]);
   return (
     <section id="top" className="relative flex min-h-[100svh] items-center overflow-hidden px-6 pt-28 pb-16">
       <div className="hero-glow pointer-events-none absolute inset-0" />
@@ -202,14 +266,18 @@ function Hero() {
           transition={{ delay: 0.95, duration: 0.6 }}
           className="mt-10 flex flex-wrap gap-3"
         >
-          <Button asChild size="lg" className="rounded-full">
-            <a href="#projects">
-              {t.viewProjects} <ArrowUpRight />
-            </a>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
-            <a href="#contact">{t.contact}</a>
-          </Button>
+          <Magnetic>
+            <Button asChild size="lg" className="rounded-full">
+              <a href="#projects">
+                {t.viewProjects} <ArrowUpRight />
+              </a>
+            </Button>
+          </Magnetic>
+          <Magnetic>
+            <Button asChild size="lg" variant="outline" className="rounded-full bg-transparent">
+              <a href="#contact">{t.contact}</a>
+            </Button>
+          </Magnetic>
         </motion.div>
         </div>
         <motion.div
@@ -218,15 +286,17 @@ function Hero() {
           transition={{ delay: 0.45, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="relative mx-auto w-full max-w-sm lg:max-w-none"
         >
-          <div className="absolute -inset-5 rounded-[2.5rem] bg-highlight/10 blur-3xl" />
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
-            <img
-              src={heroImage.url}
-              alt="Illustration of Bobur coding at a desk at night"
-              className="max-h-[380px] w-full object-cover lg:max-h-none"
-            />
-            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-highlight/20" />
-          </div>
+          <motion.div style={{ y: picY }} className="relative">
+            <div className="absolute -inset-5 rounded-[2.5rem] bg-highlight/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+              <img
+                src={heroImage.url}
+                alt="Illustration of Bobur coding at a desk at night"
+                className="max-h-[380px] w-full object-cover lg:max-h-none"
+              />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-highlight/20" />
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
@@ -248,6 +318,32 @@ function Marquee() {
         })}
       </div>
     </div>
+  );
+}
+
+// Three numbers that tick up when the visitor scrolls to them.
+function Stats() {
+  const { t } = useLang();
+  const items = [
+    { to: yearsExperience, suffix: "+", label: t.stats.experience },
+    { to: projects.length, suffix: "", label: t.stats.projects },
+    { to: LANGS.length, suffix: "", label: t.stats.languages },
+  ];
+  return (
+    <section className="mx-auto max-w-5xl px-6 py-16">
+      <div className="grid gap-4 sm:grid-cols-3">
+        {items.map((it, i) => (
+          <Reveal key={it.label} delay={i * 0.08}>
+            <div className="card-glow rounded-2xl border border-border bg-card p-6 text-center">
+              <p className="font-display text-4xl font-bold text-highlight">
+                <Counter to={it.to} suffix={it.suffix} />
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">{it.label}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -348,6 +444,7 @@ function TiltCard({ children }: { children: ReactNode }) {
       onMouseMove={onMove}
       onMouseLeave={() => setT({ x: 0, y: 0 })}
       animate={{ rotateX: t.x, rotateY: t.y }}
+      whileHover={reduce ? {} : { y: -4 }}
       transition={{ type: "spring", stiffness: 200, damping: 20 }}
       style={{ transformPerspective: 900 }}
       className="card-glow h-full rounded-2xl border border-border bg-card"
@@ -435,7 +532,7 @@ function Skills() {
           const Icon = icons[s.icon as keyof typeof icons];
           return (
             <Reveal key={s.name} delay={i * 0.04}>
-              <div className="card-glow flex items-center gap-3 rounded-xl border border-border bg-card p-4 hover:-translate-y-1">
+              <div className="card-glow flex items-center gap-3 rounded-xl border border-border bg-card p-4 transition-transform duration-300 hover:-translate-y-1">
                 <span className="grid size-10 place-items-center rounded-lg bg-lime-soft">
                   <Icon className="size-5 text-highlight" />
                 </span>
@@ -591,6 +688,7 @@ function Page() {
       <Navbar />
       <Hero />
       <Marquee />
+      <Stats />
       <About />
       <HowIHelp />
       <Projects />

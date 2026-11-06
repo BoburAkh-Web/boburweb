@@ -34,6 +34,9 @@ export const profile = {
   github: "https://github.com/BoburAkh-Web",
 };
 
+// Years of professional experience — the number the stats band counts up to.
+export const yearsExperience = 2;
+
 // Tech shown under the hero title — the names read the same in every language.
 export const heroStack = [
   "JavaScript",

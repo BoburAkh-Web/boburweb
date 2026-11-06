@@ -47,6 +47,7 @@ export type Content = {
   educationList: Period[];
   projectDescriptions: string[];
   faq: { q: string; a: string }[];
+  stats: { experience: string; projects: string; languages: string };
   chat: {
     open: string;
     close: string;
@@ -102,6 +103,11 @@ const en: Content = {
   educationList: education,
   projectDescriptions: projects.map((p) => p.description),
   faq,
+  stats: {
+    experience: "years of experience",
+    projects: "projects shipped",
+    languages: "languages spoken",
+  },
   chat: {
     open: "Ask about my work",
     close: "Close",
@@ -224,6 +230,11 @@ const uz: Content = {
       a: `Email: ${profile.email} · Telegram: ${profile.telegram} — yoki pastdagi Aloqa bo'limidagi formadan foydalaning.`,
     },
   ],
+  stats: {
+    experience: "yillik tajriba",
+    projects: "loyiha yaratildi",
+    languages: "tilda gaplashaman",
+  },
   chat: {
     open: "Ishlarim haqida so'rang",
     close: "Yopish",
@@ -346,6 +357,11 @@ const ru: Content = {
       a: `Email: ${profile.email} · Telegram: ${profile.telegram} — или воспользуйтесь формой в разделе «Контакты» ниже.`,
     },
   ],
+  stats: {
+    experience: "года опыта",
+    projects: "проектов готово",
+    languages: "языка",
+  },
   chat: {
     open: "Спросить о моих работах",
     close: "Закрыть",
