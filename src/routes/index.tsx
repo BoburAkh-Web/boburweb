@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useReducedMotion, useScroll, useTransform, useMotionValue, useSpring, useInView, animate, type Variants } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useMotionValue, useSpring, useInView, animate, AnimatePresence, type Variants } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
 import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X, MessageCircleQuestion } from "lucide-react";
 import { toast } from "sonner";
@@ -107,6 +107,122 @@ function Magnetic({ children, strength = 0.18, radius = 8 }: { children: ReactNo
   );
 }
 
+// Thin lime bar at the very top that fills as the page is scrolled.
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const x = useSpring(scrollYProgress, { stiffness: 120, damping: 24, mass: 0.4 });
+  return <motion.div aria-hidden style={{ scaleX: x }} className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-highlight" />;
+}
+
+// Soft lime spotlight that trails the cursor. Desktop pointers only.
+function CursorGlow() {
+  const reduce = useReducedMotion();
+  const x = useMotionValue(-800);
+  const y = useMotionValue(-800);
+  const sx = useSpring(x, { stiffness: 55, damping: 18, mass: 0.7 });
+  const sy = useSpring(y, { stiffness: 55, damping: 18, mass: 0.7 });
+  useEffect(() => {
+    if (reduce || !window.matchMedia("(pointer: fine)").matches) return;
+    const move = (e: PointerEvent) => {
+      x.set(e.clientX);
+      y.set(e.clientY);
+    };
+    window.addEventListener("pointermove", move, { passive: true });
+    return () => window.removeEventListener("pointermove", move);
+  }, [reduce, x, y]);
+  return (
+    <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 -z-10 hidden sm:block" style={{ x: sx, y: sy }}>
+      <div className="size-[460px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-highlight/10 blur-3xl" />
+    </motion.div>
+  );
+}
+
+// Types a role, pauses, erases it and types the next one.
+function TypeWords({ words, startDelay = 0 }: { words: string[]; startDelay?: number }) {
+  const reduce = useReducedMotion();
+  const [i, setI] = useState(0);
+  const [text, setText] = useState("");
+  const [deleting, setDeleting] = useState(false);
+  const [started, setStarted] = useState(startDelay === 0);
+
+  useEffect(() => {
+    if (!started) {
+      const t = window.setTimeout(() => setStarted(true), startDelay);
+      return () => clearTimeout(t);
+    }
+    const full = words[i % words.length] ?? "";
+    if (reduce) {
+      setText(full);
+      return () => {};
+    }
+    if (!deleting) {
+      if (text.length < full.length) {
+        const t = window.setTimeout(() => setText(full.slice(0, text.length + 1)), 55);
+        return () => clearTimeout(t);
+      }
+      const t = window.setTimeout(() => setDeleting(true), 1900);
+      return () => clearTimeout(t);
+    }
+    if (text.length > 0) {
+      const t = window.setTimeout(() => setText(full.slice(0, text.length - 1)), 28);
+      return () => clearTimeout(t);
+    }
+    const t = window.setTimeout(() => {
+      setDeleting(false);
+      setI((n) => n + 1);
+    }, 150);
+    return () => clearTimeout(t);
+  }, [started, startDelay, reduce, text, deleting, i, words]);
+
+  return (
+    <span className="inline-block text-highlight">
+      <span aria-hidden>{reduce ? (words[i % words.length] ?? "") : text}</span>
+      <span aria-hidden className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[1px] animate-pulse bg-highlight/70" />
+      <span className="sr-only">{words[0]}</span>
+    </span>
+  );
+}
+
+// Wordmark panel that lifts away once per visit.
+function Intro() {
+  const reduce = useReducedMotion();
+  const [show, setShow] = useState(true);
+  useEffect(() => {
+    if (reduce || sessionStorage.getItem("intro-seen")) {
+      setShow(false);
+      return;
+    }
+    const t = window.setTimeout(() => {
+      setShow(false);
+      sessionStorage.setItem("intro-seen", "1");
+    }, 1000);
+    return () => clearTimeout(t);
+  }, [reduce]);
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          key="intro"
+          initial={{ y: 0 }}
+          animate={{ y: 0 }}
+          exit={{ y: "-105%" }}
+          transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[70] grid place-items-center bg-background"
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+            className="font-display text-4xl font-bold"
+          >
+            bobur<span className="text-highlight">.</span>
+          </motion.p>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function ThemeToggle() {
   const [dark, setDark] = useState(true);
   useEffect(() => setDark(document.documentElement.classList.contains("dark")), []);
@@ -149,6 +265,29 @@ function Navbar() {
   const { t } = useLang();
   const links = (["about", "projects", "skills", "resume", "contact"] as const).map((id) => ({ id, label: t.nav[id] }));
   const [open, setOpen] = useState(false);
+  const [hover, setHover] = useState<string | null>(null);
+  const [active, setActive] = useState("about");
+
+  // Light up the menu item for the section you are looking at.
+  useEffect(() => {
+    const els = links
+      .map((l) => document.getElementById(l.id))
+      .filter((e): e is HTMLElement => e !== null);
+    const io = new IntersectionObserver(
+      (entries) => {
+        const best = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (best) setActive(best.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.3, 0.6, 1] },
+    );
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
+
+  const shown = hover ?? active;
   return (
     <motion.header
       initial={{ y: -40, opacity: 0 }}
@@ -162,8 +301,21 @@ function Navbar() {
         </a>
         <div className="hidden gap-6 text-sm text-muted-foreground sm:flex">
           {links.map((l) => (
-            <a key={l.id} href={`#${l.id}`} className="transition-colors hover:text-foreground">
+            <a
+              key={l.id}
+              href={`#${l.id}`}
+              onMouseEnter={() => setHover(l.id)}
+              onMouseLeave={() => setHover(null)}
+              className={`relative transition-colors hover:text-foreground ${active === l.id ? "text-foreground" : ""}`}
+            >
               {l.label}
+              {shown === l.id && (
+                <motion.span
+                  layoutId="nav-underline"
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  className="absolute -bottom-1.5 left-0 h-0.5 w-full rounded-full bg-highlight"
+                />
+              )}
             </a>
           ))}
         </div>
@@ -204,7 +356,7 @@ function Navbar() {
 
 function Hero() {
   const { t, lang } = useLang();
-  const words = t.greeting(profile.name, t.role).split(" ");
+  const words = t.greeting(profile.name, "").trim().split(" ");
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const picY = useTransform(scrollY, [0, 700], [0, reduce ? 0 : -60]);
@@ -236,6 +388,9 @@ function Hero() {
               {w}
             </motion.span>
           ))}
+          <motion.span variants={fadeUp} className="inline-block">
+            <TypeWords key={lang} words={t.roles} startDelay={1.15} />
+          </motion.span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -351,7 +506,15 @@ function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
     <Reveal>
       <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-highlight">{eyebrow}</p>
-      <h2 className="mb-12 text-4xl font-bold sm:text-5xl">{title}</h2>
+      <h2 className="mb-5 text-4xl font-bold sm:text-5xl">{title}</h2>
+      <motion.div
+        aria-hidden
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true, margin: "-60px" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
+        className="mb-12 h-px w-28 origin-left bg-gradient-to-r from-highlight to-transparent"
+      />
     </Reveal>
   );
 }
@@ -548,6 +711,9 @@ function Skills() {
 
 function ResumeSection() {
   const { t } = useLang();
+  const olRef = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: olRef, offset: ["start 0.85", "end 0.6"] });
+  const lineY = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.5 });
   return (
     <section id="resume" className="mx-auto max-w-5xl px-6 py-28">
       <SectionTitle eyebrow={t.resumeEyebrow} title={t.resumeTitle} />
@@ -564,10 +730,22 @@ function ResumeSection() {
               {t.askAssistant} <MessageCircleQuestion />
             </Button>
           </div>
-          <ol className="relative space-y-8 border-l border-border pl-6">
+          <ol ref={olRef} className="relative space-y-8 border-l border-border pl-6">
+            <motion.span
+              aria-hidden
+              style={{ scaleY: lineY }}
+              className="absolute -left-px top-0 h-full w-px origin-top bg-highlight"
+            />
             {t.career.map((c, i) => (
               <li key={i} className="relative">
-                <span className="absolute -left-[30px] top-1.5 size-2.5 rounded-full bg-lime" />
+                <motion.span
+                  aria-hidden
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                  className="absolute -left-[30px] top-1.5 size-2.5 rounded-full bg-lime"
+                />
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-highlight">{c.period}</p>
                 <h4 className="mt-1 text-lg font-semibold">{c.title}</h4>
                 <p className="mt-1 text-sm text-muted-foreground">{c.detail}</p>
@@ -652,9 +830,26 @@ function Contact() {
             }}
             className="space-y-3 rounded-2xl border border-border bg-card p-6"
           >
-            <Input name="name" required placeholder={t.formName} className="h-11" />
-            <Input name="email" type="email" required placeholder="you@email.com" className="h-11" />
-            <Textarea name="message" required placeholder={t.formMessage} rows={5} />
+            <Input
+              name="name"
+              required
+              placeholder={t.formName}
+              className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
+            />
+            <Input
+              name="email"
+              type="email"
+              required
+              placeholder="you@email.com"
+              className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
+            />
+            <Textarea
+              name="message"
+              required
+              placeholder={t.formMessage}
+              rows={5}
+              className="focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
+            />
             <Button type="submit" size="lg" className="w-full rounded-full">
               {t.formSend} <Send />
             </Button>
@@ -685,6 +880,9 @@ function Footer() {
 function Page() {
   return (
     <main className="overflow-x-hidden">
+      <Intro />
+      <ScrollProgress />
+      <CursorGlow />
       <Navbar />
       <Hero />
       <Marquee />

@@ -10,6 +10,7 @@ type Period = Item & { period: string };
 
 export type Content = {
   role: string;
+  roles: string[];
   location: string;
   tagline: string;
   heroExperience: string;
@@ -66,6 +67,7 @@ export type Content = {
 
 const en: Content = {
   role: profile.role,
+  roles: ["Frontend Developer", "React Developer", "Next.js Developer"],
   location: profile.location,
   tagline: profile.tagline,
   heroExperience: profile.experience,
@@ -126,6 +128,7 @@ const en: Content = {
 
 const uz: Content = {
   role: "Frontend dasturchi",
+  roles: ["Frontend dasturchi", "React dasturchi", "Next.js dasturchi"],
   location: "Toshkent, O'zbekiston",
   tagline:
     "2+ yillik tajribaga ega frontend dasturchi — JavaScript, React, Next.js va TypeScript yordamida tez va animatsiyali veb-mahsulotlar yarataman.",
@@ -253,6 +256,7 @@ const uz: Content = {
 
 const ru: Content = {
   role: "Frontend-разработчик",
+  roles: ["Frontend-разработчик", "React-разработчик", "Next.js-разработчик"],
   location: "Ташкент, Узбекистан",
   tagline:
     "Frontend-разработчик с опытом 2+ года — создаю быстрые анимированные веб-продукты на JavaScript, React, Next.js и TypeScript.",
