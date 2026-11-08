@@ -142,6 +142,34 @@
   to { transform: translateX(-50%); }
 }
 
+/* Typed headline: each letter glides in softly. */
+@utility char-in {
+  animation: char-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes char-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em) scale(0.92);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Soft breathing caret instead of a hard blink. */
+@utility caret-glow {
+  animation: caret-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes caret-glow {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
 /* Splash panel: skip it before first paint once this visit has seen it. */
 html.intro-seen #intro-panel {
   display: none;

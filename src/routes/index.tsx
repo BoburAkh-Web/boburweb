@@ -180,8 +180,16 @@ function TypeWords({ words, startDelay = 0 }: { words: string[]; startDelay?: nu
 
   return (
     <span className="inline-block text-highlight">
-      <span aria-hidden>{reduce ? (words[i % words.length] ?? "") : text}</span>
-      <span aria-hidden className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[1px] animate-pulse bg-highlight/70 [animation-duration:1.5s]" />
+      <span aria-hidden>
+        {reduce
+          ? (words[i % words.length] ?? "")
+          : text.split("").map((ch, idx) => (
+              <span key={`${i}-${idx}`} className="char-in inline-block will-change-transform">
+                {ch === " " ? " " : ch}
+              </span>
+            ))}
+      </span>
+      <span aria-hidden className="caret-glow ml-1 inline-block h-[0.8em] w-[3px] translate-y-[1px] rounded-full bg-highlight/70" />
       <span className="sr-only">{words[0]}</span>
     </span>
   );
