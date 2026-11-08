@@ -101,11 +101,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 const themeScript = `try{if(localStorage.getItem('theme')==='light')document.documentElement.classList.remove('dark')}catch(e){}`;
 
+// Hides the splash panel before first paint when this visit has already seen it.
+const introScript = `try{if(sessionStorage.getItem('intro-seen'))document.documentElement.classList.add('intro-seen')}catch(e){}`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <HeadContent />
       </head>
       <body>

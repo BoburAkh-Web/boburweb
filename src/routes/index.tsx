@@ -208,15 +208,11 @@ function Intro() {
           exit={{ y: "-105%" }}
           transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[70] grid place-items-center bg-background"
+          id="intro-panel"
         >
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.5 }}
-            className="font-display text-4xl font-bold"
-          >
+          <p className="font-display text-4xl font-bold">
             bobur<span className="text-highlight">.</span>
-          </motion.p>
+          </p>
         </motion.div>
       )}
     </AnimatePresence>
@@ -830,26 +826,9 @@ function Contact() {
             }}
             className="space-y-3 rounded-2xl border border-border bg-card p-6"
           >
-            <Input
-              name="name"
-              required
-              placeholder={t.formName}
-              className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
-            />
-            <Input
-              name="email"
-              type="email"
-              required
-              placeholder="you@email.com"
-              className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
-            />
-            <Textarea
-              name="message"
-              required
-              placeholder={t.formMessage}
-              rows={5}
-              className="focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25"
-            />
+            <Input name="name" required placeholder={t.formName} className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25" />
+            <Input name="email" type="email" required placeholder="you@email.com" className="h-11 focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25" />
+            <Textarea name="message" required placeholder={t.formMessage} rows={5} className="focus-visible:border-highlight focus-visible:ring-2 focus-visible:ring-highlight/25" />
             <Button type="submit" size="lg" className="w-full rounded-full">
               {t.formSend} <Send />
             </Button>

@@ -141,3 +141,8 @@
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
+
+/* Splash panel: skip it before first paint once this visit has seen it. */
+html.intro-seen #intro-panel {
+  display: none;
+}
