@@ -157,27 +157,31 @@ function TypeWords({ words, startDelay = 0 }: { words: string[]; startDelay?: nu
     }
     if (!deleting) {
       if (text.length < full.length) {
-        const t = window.setTimeout(() => setText(full.slice(0, text.length + 1)), 55);
+        // Human-like pace: base 130ms with gentle variation, a longer beat at word starts.
+        const base = 130 + Math.random() * 90;
+        const beat = text.length === 0 ? 350 : 0;
+        const t = window.setTimeout(() => setText(full.slice(0, text.length + 1)), base + beat);
         return () => clearTimeout(t);
       }
-      const t = window.setTimeout(() => setDeleting(true), 1900);
+      // Hold the finished word longer so visitors can read it.
+      const t = window.setTimeout(() => setDeleting(true), 3400);
       return () => clearTimeout(t);
     }
     if (text.length > 0) {
-      const t = window.setTimeout(() => setText(full.slice(0, text.length - 1)), 28);
+      const t = window.setTimeout(() => setText(full.slice(0, text.length - 1)), 55);
       return () => clearTimeout(t);
     }
     const t = window.setTimeout(() => {
       setDeleting(false);
       setI((n) => n + 1);
-    }, 150);
+    }, 420);
     return () => clearTimeout(t);
   }, [started, startDelay, reduce, text, deleting, i, words]);
 
   return (
     <span className="inline-block text-highlight">
       <span aria-hidden>{reduce ? (words[i % words.length] ?? "") : text}</span>
-      <span aria-hidden className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[1px] animate-pulse bg-highlight/70" />
+      <span aria-hidden className="ml-1 inline-block h-[0.8em] w-[3px] translate-y-[1px] animate-pulse bg-highlight/70 [animation-duration:1.5s]" />
       <span className="sr-only">{words[0]}</span>
     </span>
   );
