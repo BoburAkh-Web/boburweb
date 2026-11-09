@@ -10,10 +10,12 @@ describe("portfolio FAQ", () => {
     }
   });
 
-  it("never quotes specific rates or prices", () => {
-    for (const f of faq) {
-      expect(f.a).not.toMatch(/\$\s?\d|\b\d+\s?(usd|uzs|som)\b/i);
-    }
+  it("quotes the published starting prices and points to the Pricing section", () => {
+    const pricing = faq.find((f) => /cost/i.test(f.q));
+    expect(pricing?.a).toContain("$150");
+    expect(pricing?.a).toContain("$300");
+    expect(pricing?.a).toContain("$600");
+    expect(pricing?.a).toMatch(/pricing/i);
   });
 
   it("answers contact questions with the real contact details", () => {

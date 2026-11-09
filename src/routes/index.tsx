@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion, useScroll, useTransform, useMotionValue, useSpring, useInView, animate, AnimatePresence, type Variants } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
-import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X, MessageCircleQuestion } from "lucide-react";
+import { icons, ArrowUpRight, Github, Mail, Send, Moon, Sun, ExternalLink, MapPin, Menu, X, MessageCircleQuestion, Clock, Check } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -271,7 +271,7 @@ function LangSwitch() {
 
 function Navbar() {
   const { t } = useLang();
-  const links = (["about", "projects", "skills", "resume", "contact"] as const).map((id) => ({ id, label: t.nav[id] }));
+  const links = (["about", "projects", "skills", "resume", "pricing", "contact"] as const).map((id) => ({ id, label: t.nav[id] }));
   const [open, setOpen] = useState(false);
   const [hover, setHover] = useState<string | null>(null);
   const [active, setActive] = useState("about");
@@ -797,6 +797,48 @@ function ResumeSection() {
   );
 }
 
+function Pricing() {
+  const { t } = useLang();
+  return (
+    <section id="pricing" className="mx-auto max-w-5xl px-6 py-28">
+      <SectionTitle eyebrow={t.pricingEyebrow} title={t.pricingTitle} />
+      <div className="grid gap-5 md:grid-cols-3">
+        {t.pricing.map((p, i) => (
+          <Reveal key={p.name} delay={i * 0.08}>
+            <div
+              className={`card-glow flex h-full flex-col rounded-2xl border bg-card p-6 transition-transform duration-300 hover:-translate-y-1 ${
+                i === 1 ? "border-highlight/50 shadow-[0_0_40px_-12px] shadow-highlight/30" : "border-border"
+              }`}
+            >
+              <h3 className="font-display text-xl font-semibold">{p.name}</h3>
+              <p className="mt-3 font-display text-3xl font-bold text-highlight">{p.price}</p>
+              <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
+                <Clock className="size-4 text-highlight" /> {p.time}
+              </p>
+              <ul className="mt-5 flex-1 space-y-2.5 text-sm">
+                {p.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <Check className="mt-0.5 size-4 shrink-0 text-highlight" />
+                    <span className="text-muted-foreground">{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+      <Reveal delay={0.15}>
+        <div className="mt-8 flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-6 text-center">
+          <p className="max-w-2xl text-sm text-muted-foreground">{t.pricingNote}</p>
+          <Button asChild size="lg" className="rounded-full">
+            <a href="#contact">{t.pricingCta} <ArrowUpRight className="size-4" /></a>
+          </Button>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
 function Contact() {
   const { t } = useLang();
   const links = [
@@ -883,6 +925,7 @@ function Page() {
       <Projects />
       <Skills />
       <ResumeSection />
+      <Pricing />
       <Contact />
       <PortfolioChat />
       <Footer />

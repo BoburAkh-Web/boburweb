@@ -131,7 +131,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How much does a project cost?",
-    a: "Budget and rates are discussed individually for each project. Send a short description of what you need by email or Telegram and he'll come back with a proposal.",
+    a: "Landing pages start from $150, business websites from $300, and web apps or platforms from $600 — the final price depends on your project. See the Pricing section for details, or send a short description of what you need by email or Telegram and he'll come back with an exact estimate.",
   },
   {
     q: "How do we start working together?",

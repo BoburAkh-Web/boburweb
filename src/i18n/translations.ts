@@ -16,7 +16,7 @@ export type Content = {
   heroExperience: string;
   greeting: (name: string, role: string) => string;
   openToWork: string;
-  nav: { about: string; projects: string; skills: string; resume: string; contact: string };
+  nav: { about: string; projects: string; skills: string; resume: string; pricing: string; contact: string };
   viewProjects: string;
   contact: string;
   aboutEyebrow: string;
@@ -27,6 +27,11 @@ export type Content = {
   stackTitle: string;
   resumeEyebrow: string;
   resumeTitle: string;
+  pricingEyebrow: string;
+  pricingTitle: string;
+  pricingNote: string;
+  pricingCta: string;
+  pricing: { name: string; price: string; time: string; features: string[] }[];
   workHistory: string;
   education: string;
   skills: string;
@@ -73,7 +78,7 @@ const en: Content = {
   heroExperience: profile.experience,
   greeting: (n, r) => `Hi, I'm ${n} — ${r}`,
   openToWork: "Open to work",
-  nav: { about: "About", projects: "Projects", skills: "Skills", resume: "Resume", contact: "Contact" },
+  nav: { about: "About", projects: "Projects", skills: "Skills", resume: "Resume", pricing: "Pricing", contact: "Contact" },
   viewProjects: "View Projects",
   contact: "Contact",
   aboutEyebrow: "01 — About",
@@ -84,13 +89,53 @@ const en: Content = {
   stackTitle: "Tools I work with",
   resumeEyebrow: "04 — Resume",
   resumeTitle: "Work, education & skills",
+  pricingEyebrow: "05 — Pricing",
+  pricingTitle: "Clear prices, no surprises",
+  pricingNote:
+    "Every project is different — the final price depends on your needs. Write to me and I'll send a free, exact estimate within a day.",
+  pricingCta: "Get a free estimate",
+  pricing: [
+    {
+      name: "Landing Page",
+      price: "from $150",
+      time: "~1 week",
+      features: [
+        "One-page site that presents your business",
+        "Looks great on every phone, loads fast",
+        "Contact form & map",
+        "1 week of free fixes after launch",
+      ],
+    },
+    {
+      name: "Business Website",
+      price: "from $300",
+      time: "2–3 weeks",
+      features: [
+        "Up to 5 pages (home, services, about…)",
+        "In your language: EN / UZ / RU",
+        "Basic SEO so Google finds you",
+        "2 weeks of free support",
+      ],
+    },
+    {
+      name: "Web App / Platform",
+      price: "from $600",
+      time: "1 month+",
+      features: [
+        "Online ordering, dashboards, accounts",
+        "Admin panel to manage everything",
+        "Database & integrations",
+        "1 month of free support",
+      ],
+    },
+  ],
   workHistory: "Work history",
   education: "Education",
   skills: "Skills",
   askAssistant: "Ask the assistant",
   discussProject: "Discuss a project",
   hireQuestion: "How can I hire him for a project?",
-  contactEyebrow: "05 — Contact",
+  contactEyebrow: "06 — Contact",
   contactTitle: "Let's build something",
   formName: "Your name",
   formMessage: "Tell me about your project",
@@ -135,7 +180,7 @@ const uz: Content = {
   heroExperience: "2+ yillik tajriba",
   greeting: (n, r) => `Salom, men ${n} — ${r}`,
   openToWork: "Ishga ochiqman",
-  nav: { about: "Men haqimda", projects: "Loyihalar", skills: "Ko'nikmalar", resume: "Rezyume", contact: "Aloqa" },
+  nav: { about: "Men haqimda", projects: "Loyihalar", skills: "Ko'nikmalar", resume: "Rezyume", pricing: "Narxlar", contact: "Aloqa" },
   viewProjects: "Loyihalarni ko'rish",
   contact: "Aloqa",
   aboutEyebrow: "01 — Men haqimda",
@@ -146,13 +191,53 @@ const uz: Content = {
   stackTitle: "Men ishlatadigan vositalar",
   resumeEyebrow: "04 — Rezyume",
   resumeTitle: "Ish, ta'lim va ko'nikmalar",
+  pricingEyebrow: "05 — Narxlar",
+  pricingTitle: "Aniq narxlar, syurprizlarsiz",
+  pricingNote:
+    "Har bir loyiha har xil — yakuniy narx ehtiyojlaringizga bog'liq. Menga yozing, bir kun ichida bepul va aniq baho beraman.",
+  pricingCta: "Bepul baho olish",
+  pricing: [
+    {
+      name: "Landing sahifa",
+      price: "$150 dan",
+      time: "~1 hafta",
+      features: [
+        "Biznesingizni taqdim etadigan bir sahifali sayt",
+        "Har qanday telefonda chiroyli, tez yuklanadi",
+        "Aloqa formasi va xarita",
+        "Ishga tushgandan keyin 1 hafta bepul tuzatishlar",
+      ],
+    },
+    {
+      name: "Biznes sayti",
+      price: "$300 dan",
+      time: "2–3 hafta",
+      features: [
+        "5 tagacha sahifa (bosh sahifa, xizmatlar, biz haqimizda…)",
+        "Sizning tilingizda: EN / UZ / RU",
+        "Google sizi topishi uchun asosiy SEO",
+        "2 hafta bepul qo'llab-quvvatlash",
+      ],
+    },
+    {
+      name: "Veb-ilova / Platforma",
+      price: "$600 dan",
+      time: "1 oy+",
+      features: [
+        "Onlayn buyurtmalar, panellar, hisoblar",
+        "Hammasini boshqarish uchun admin panel",
+        "Ma'lumotlar bazasi va integratsiyalar",
+        "1 oy bepul qo'llab-quvvatlash",
+      ],
+    },
+  ],
   workHistory: "Ish tajribasi",
   education: "Ta'lim",
   skills: "Ko'nikmalar",
   askAssistant: "Yordamchidan so'rash",
   discussProject: "Loyihani muhokama qilish",
   hireQuestion: "Uni loyiha uchun qanday yollash mumkin?",
-  contactEyebrow: "05 — Aloqa",
+  contactEyebrow: "06 — Aloqa",
   contactTitle: "Keling, birga yarataylik",
   formName: "Ismingiz",
   formMessage: "Loyihangiz haqida yozing",
@@ -222,7 +307,7 @@ const uz: Content = {
     },
     {
       q: "Loyiha qancha turadi?",
-      a: "Narx har bir loyiha uchun alohida kelishiladi. Email yoki Telegram orqali nima kerakligini qisqacha yozing — u taklif bilan javob beradi.",
+      a: "Landing sahifalar $150 dan, biznes saytlar $300 dan, veb-ilova va platformalar $600 dan boshlanadi — yakuniy narx loyihangizga bog'liq. Batafsil ma'lumot Narxlar bo'limida, yoki email/Telegram orqali qisqacha yozing — u aniq baho bilan javob beradi.",
     },
     {
       q: "Qanday qilib birga ishlashni boshlaymiz?",
@@ -263,7 +348,7 @@ const ru: Content = {
   heroExperience: "Более 2 лет опыта",
   greeting: (n, r) => `Привет, я ${n} — ${r}`,
   openToWork: "Открыт к работе",
-  nav: { about: "Обо мне", projects: "Проекты", skills: "Навыки", resume: "Резюме", contact: "Контакты" },
+  nav: { about: "Обо мне", projects: "Проекты", skills: "Навыки", resume: "Резюме", pricing: "Цены", contact: "Контакты" },
   viewProjects: "Смотреть проекты",
   contact: "Связаться",
   aboutEyebrow: "01 — Обо мне",
@@ -274,13 +359,53 @@ const ru: Content = {
   stackTitle: "Инструменты, с которыми я работаю",
   resumeEyebrow: "04 — Резюме",
   resumeTitle: "Опыт, образование и навыки",
+  pricingEyebrow: "05 — Цены",
+  pricingTitle: "Понятные цены, без сюрпризов",
+  pricingNote:
+    "Каждый проект уникален — итоговая цена зависит от ваших задач. Напишите мне, и я дам бесплатную точную оценку в течение дня.",
+  pricingCta: "Получить бесплатную оценку",
+  pricing: [
+    {
+      name: "Лендинг",
+      price: "от $150",
+      time: "~1 неделя",
+      features: [
+        "Одностраничный сайт о вашем бизнесе",
+        "Удобен на любом телефоне, быстро грузится",
+        "Форма связи и карта",
+        "1 неделя бесплатных правок после запуска",
+      ],
+    },
+    {
+      name: "Бизнес-сайт",
+      price: "от $300",
+      time: "2–3 недели",
+      features: [
+        "До 5 страниц (главная, услуги, о нас…)",
+        "На вашем языке: EN / UZ / RU",
+        "Базовое SEO, чтобы Google вас находил",
+        "2 недели бесплатной поддержки",
+      ],
+    },
+    {
+      name: "Веб-приложение / Платформа",
+      price: "от $600",
+      time: "от 1 месяца",
+      features: [
+        "Онлайн-заказы, панели, аккаунты",
+        "Админ-панель для управления всем",
+        "База данных и интеграции",
+        "1 месяц бесплатной поддержки",
+      ],
+    },
+  ],
   workHistory: "Опыт работы",
   education: "Образование",
   skills: "Навыки",
   askAssistant: "Спросить ассистента",
   discussProject: "Обсудить проект",
   hireQuestion: "Как нанять его на проект?",
-  contactEyebrow: "05 — Контакты",
+  contactEyebrow: "06 — Контакты",
   contactTitle: "Давайте создадим что-то вместе",
   formName: "Ваше имя",
   formMessage: "Расскажите о вашем проекте",
@@ -350,7 +475,7 @@ const ru: Content = {
     },
     {
       q: "Сколько стоит проект?",
-      a: "Бюджет обсуждается индивидуально для каждого проекта. Кратко опишите задачу по email или в Telegram — он ответит с предложением.",
+      a: "Лендинги — от $150, бизнес-сайты — от $300, веб-приложения и платформы — от $600; итоговая цена зависит от проекта. Подробности — в разделе «Цены», или кратко опишите задачу по email или в Telegram — он ответит с точной оценкой.",
     },
     {
       q: "Как начать работать вместе?",
